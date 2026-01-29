@@ -2,14 +2,35 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a1a1a;
+  /* Nueva paleta premium - Inspirada en productos naturales */
+  --primary-blue: #052659;
+  --secondary-blue: #1e40af;
+  --accent-mint: #a7f3d0;
+  --accent-cyan: #a5f3fc;
+  --text-dark: #1e293b;
+  --text-medium: #475569;
+  --text-light: #64748b;
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --gradient-start: #f0f9ff;
+  --gradient-end: #e0f2fe;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  --color-primary: var(--primary-blue);
+  --color-secondary: var(--secondary-blue);
+  --color-accent-mint: var(--accent-mint);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-text-dark: var(--text-dark);
+  --color-text-medium: var(--text-medium);
+  --color-text-light: var(--text-light);
+  --color-card-bg: var(--card-bg);
+  --shadow-soft: 0 20px 50px rgba(8, 112, 184, 0.1);
+  --shadow-medium: 0 25px 60px rgba(8, 112, 184, 0.15);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +41,466 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to bottom, #f8fafc 0%, #f1f5f9 100%);
+  color: #1e293b;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 100vh;
+  position: relative;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* En desktop, el fondo es fixed para mejor efecto */
+@media (min-width: 769px) {
+  body {
+    background: linear-gradient(to bottom, #f8fafc 0%, #f1f5f9 100%) fixed;
+  }
+}
+
+/* Efecto de resplandor para imágenes */
+.glow-effect {
+  filter: drop-shadow(0 0 40px rgba(193, 232, 255, 0.3));
+}
+
+/* Estilos para story tracker estilo Instagram */
+.story-tracker {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 100;
+  display: flex;
+  gap: 4px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.story-tracker-bar {
+  flex: 1;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.story-tracker-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: white;
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.story-tracker-bar.active .story-tracker-fill {
+  animation: fillBar 8s linear forwards;
+}
+
+@keyframes fillBar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* Contenedores con "Sustancia" - Cards premium */
+.card-premium {
+  background: var(--card-bg);
+  backdrop-filter: blur(2xl);
+  -webkit-backdrop-filter: blur(2xl);
+  border-radius: 40px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.card-premium:hover {
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Estilos para móvil - Más minimalista */
+.card-mobile {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Tarjetas de selección minimalistas */
+.selection-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(xl);
+  -webkit-backdrop-filter: blur(xl);
+  border-radius: 24px;
+  border: 1px solid rgba(5, 38, 89, 0.08);
+  transition: all 0.3s ease;
+}
+
+.selection-card:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
+
+.selection-card.selected {
+  border-color: var(--accent-cyan);
+  background: rgba(165, 243, 252, 0.08);
+  box-shadow: 0 0 0 1px var(--accent-cyan), 0 10px 30px rgba(5, 38, 89, 0.1);
+}
+
+/* Tarjetas premium para calificación */
+.card-feature {
+  background: var(--card-bg);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Estilos para progress bar estilo Instagram Stories */
+.progress-bar-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 100;
+}
+
+.progress-bar {
+  height: 100%;
+  background: white;
+  transition: width 0.3s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+/* Área de click para navegación */
+.click-navigation-area {
+  position: absolute;
+  top: 60px; /* Debajo del header sticky */
+  bottom: 0;
+  width: 50%;
+  z-index: 5;
+}
+
+.click-navigation-area.left {
+  left: 0;
+}
+
+.click-navigation-area.right {
+  right: 0;
+}
+
+/* En desktop, las áreas de click empiezan desde arriba */
+@media (min-width: 769px) {
+  .click-navigation-area {
+    top: 0;
+  }
+}
+
+/* Asegurar que los elementos del formulario tengan mayor z-index */
+form button,
+form input,
+form .grid > * {
+  position: relative;
+  z-index: 20;
+  cursor: pointer;
+}
+
+/* Mejorar la interactividad de los botones del formulario */
+form button:not(:disabled):hover {
+  transform: translateY(-3px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenedor del formulario */
+form {
+  position: relative;
+  z-index: 15;
+}
+
+/* Estilos para inputs y botones seleccionados */
+input:focus,
+button:focus {
+  outline: 3px solid #00D4FF;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+}
+
+/* Mejorar la visibilidad de las opciones seleccionadas */
+button[aria-selected="true"] {
+  box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.5);
+}
+
+/* Limpieza visual - Eliminar bordes que delimiten "cajas" internas */
+.glass-card-light,
+.bg-blue-50,
+.bg-gradient-to-r {
+  border: none !important;
+}
+
+/* En móvil, eliminar cualquier borde residual */
+@media (max-width: 768px) {
+  .glass-card-light,
+  .bg-blue-50,
+  .bg-gradient-to-r,
+  .rounded-2xl,
+  .rounded-3xl,
+  .rounded-xl {
+    border-radius: 0 !important;
+    border: none !important;
+  }
+  
+  /* Asegurar que los inputs y botones no tengan bordes muy marcados */
+  input,
+  button:not(.glass-card-mobile) {
+    border-width: 1px !important;
+  }
+}
+
+/* Transición suave entre móvil y desktop */
+@media (min-width: 769px) {
+  .glass-card {
+    transition: all 0.3s ease;
+  }
+  
+  .glass-card:hover {
+    box-shadow: 0 15px 35px rgba(5, 38, 89, 0.05);
+  }
+}
+
+/* Tipografía orgánica premium */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif), ui-serif, Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--primary-blue);
+  line-height: 1.1;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 3.5rem;
+}
+
+h2 {
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+
+h3, h4 {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Títulos premium */
+.premium-title {
+  font-family: var(--font-serif), ui-serif, Georgia, serif;
+  font-weight: 800;
+  color: var(--primary-blue);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.premium-subtitle {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
+  color: var(--text-medium);
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+}
+
+p, span, div, button {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  color: var(--text-medium);
+  line-height: 1.7;
+}
+
+/* Texto con colores orgánicos */
+.text-primary {
+  color: var(--primary-blue);
+}
+
+.text-secondary {
+  color: var(--secondary-blue);
+}
+
+.text-accent-mint {
+  color: var(--accent-mint);
+}
+
+.text-accent-cyan {
+  color: var(--accent-cyan);
+}
+
+.text-dark {
+  color: var(--text-dark);
+}
+
+.text-medium {
+  color: var(--text-medium);
+}
+
+.text-light {
+  color: var(--text-light);
+}
+
+/* Tracking para legibilidad */
+.tracking-organic {
+  letter-spacing: 0.02em;
+}
+
+.tracking-wide-organic {
+  letter-spacing: 0.05em;
+}
+
+/* Sombra de contacto para imágenes 3D */
+.shadow-contact {
+  filter: drop-shadow(0 25px 35px rgba(5, 38, 89, 0.15)) drop-shadow(0 5px 15px rgba(5, 38, 89, 0.1));
+}
+
+/* Sombra natural en la base */
+.shadow-natural-base {
+  position: relative;
+}
+
+.shadow-natural-base::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 10%;
+  right: 10%;
+  height: 20px;
+  background: radial-gradient(ellipse at center, rgba(5, 38, 89, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* Iconos minimalistas en línea fina */
+.icon-minimal {
+  stroke-width: 1;
+  color: var(--text-medium);
+}
+
+.icon-minimal.selected {
+  stroke-width: 1.5;
+  color: var(--accent-cyan);
+}
+
+/* Animaciones escalonadas (stagger) */
+.stagger-child > * {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.stagger-child.animate > *:nth-child(1) { animation: fadeInUp 0.5s ease 0.1s forwards; }
+.stagger-child.animate > *:nth-child(2) { animation: fadeInUp 0.5s ease 0.2s forwards; }
+.stagger-child.animate > *:nth-child(3) { animation: fadeInUp 0.5s ease 0.3s forwards; }
+.stagger-child.animate > *:nth-child(4) { animation: fadeInUp 0.5s ease 0.4s forwards; }
+.stagger-child.animate > *:nth-child(5) { animation: fadeInUp 0.5s ease 0.5s forwards; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Transiciones suaves para elementos de UI */
+.transition-organic {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Botones y elementos interactivos */
+.btn-organic {
+  background: var(--card-bg);
+  border: 1px solid rgba(5, 38, 89, 0.1);
+  border-radius: 24px;
+  padding: 12px 24px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+}
+
+.btn-organic:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-organic.selected {
+  background: rgba(165, 243, 252, 0.1);
+  border-color: var(--accent-cyan);
+  color: var(--primary-blue);
+}
+
+/* Animación de partículas de agua */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-10px);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-15px) translateX(5px);
+    opacity: 0.8;
+  }
+}
+
+.water-particle {
+  position: absolute;
+  background: rgba(193, 232, 255, 0.3);
+  border-radius: 50%;
+  animation: float 8s infinite ease-in-out;
+}
+
+.water-bubble {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  animation: float 12s infinite ease-in-out;
+}
+
+/* Animaciones suaves para transiciones */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Mejorar el scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Efecto de elevación para botones de navegación */
+.w-14.h-14.rounded-full.glass-card {
+  transition: all 0.3s ease;
+}
+
+.w-14.h-14.rounded-full.glass-card:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 15px 30px rgba(5, 38, 89, 0.2);
 }
