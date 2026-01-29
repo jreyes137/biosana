@@ -308,18 +308,18 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-[100dvh] w-full flex items-center justify-center bg-gradient-to-b from-[#C1E8FF] to-[#7DA0CA] font-sans overflow-hidden">
+    <div className="min-h-[100dvh] w-full flex items-center justify-center bg-gradient-to-b from-blue-50 via-white to-blue-100 font-sans overflow-hidden">
       {/* Contenedor principal adaptativo */}
-      <div className="w-full h-full sm:w-[450px] sm:h-[850px] flex flex-col justify-between bg-white/80 backdrop-blur-2xl rounded-none sm:rounded-[40px] shadow-none sm:shadow-2xl sm:shadow-gray-400/30 overflow-hidden">
+      <div className="w-full h-full sm:w-[450px] sm:h-[850px] flex flex-col justify-between bg-gradient-to-b from-white/90 via-white/80 to-white/70 backdrop-blur-3xl rounded-none sm:rounded-[40px] shadow-none sm:shadow-2xl sm:shadow-gray-400/20 overflow-hidden">
         {/* Header - Marca a la izquierda */}
-        <div className="p-6 sm:p-10 border-b border-gray-200/50">
+        <div className="px-8 py-6 sm:px-10 sm:py-8 border-b border-gray-200/30">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-50 flex items-center justify-center">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center shadow-sm">
               <Droplets className="w-5 h-5 sm:w-7 sm:h-7 text-blue-600" strokeWidth={1} />
             </div>
             <div className="text-left">
-              <h1 className="text-lg sm:text-xl font-bold text-gray-900">BIOSANA</h1>
-              <p className="text-xs text-gray-500">AGUA PURIFICADA PREMIUM</p>
+              <h1 className="text-lg sm:text-xl font-bold text-blue-900">BIOSANA</h1>
+              <p className="text-xs text-slate-500">AGUA PURIFICADA PREMIUM</p>
             </div>
           </div>
         </div>
@@ -342,24 +342,28 @@ export default function Home() {
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.1}
               onDragEnd={handleDragEnd}
-              className="p-6 sm:p-10"
+              className="px-8 py-10 sm:px-10 sm:py-12"
             >
               {slides[currentSlide].type === "hero" && (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-12 bg-transparent">
-                  {/* Emoji Hero - Estilo Apple ultra limpio */}
-                  <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="text-8xl sm:text-9xl"
-                  >
-                    💧
-                  </motion.div>
+                  {/* Emoji Hero - Animación de flotación suave */}
+                  <div className="relative">
+                    <div className="text-8xl sm:text-9xl animate-[float_3s_ease-in-out_infinite]">
+                      💧
+                    </div>
+                    <style jsx>{`
+                      @keyframes float {
+                        0%, 100% { transform: translateY(0px); }
+                        50% { transform: translateY(-12px); }
+                      }
+                    `}</style>
+                  </div>
 
                   <div className="space-y-6">
-                    <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-900 mb-2 leading-tight">
+                    <h2 className="text-3xl sm:text-5xl font-extrabold text-blue-900 mb-2 leading-tight">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
+                    <p className="text-lg sm:text-xl text-slate-500 leading-relaxed">
                       {slides[currentSlide].description}
                     </p>
                   </div>
@@ -370,15 +374,15 @@ export default function Home() {
                 <div className="flex-1 flex flex-col justify-center">
                   <div className="text-center space-y-8">
                     <div className="flex justify-center">
-                      <div className="w-28 h-28 rounded-full bg-blue-50 flex items-center justify-center">
+                      <div className="w-28 h-28 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center shadow-sm">
                         {slides[currentSlide].icon}
                       </div>
                     </div>
                     <div className="space-y-4">
-                      <h2 className="text-4xl font-extrabold text-blue-900 leading-tight">
+                      <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight">
                         {slides[currentSlide].title}
                       </h2>
-                      <p className="text-xl text-gray-600 leading-relaxed">
+                      <p className="text-lg sm:text-xl text-slate-500 leading-relaxed">
                         {slides[currentSlide].description}
                       </p>
                     </div>
@@ -390,15 +394,15 @@ export default function Home() {
                 <div className="flex-1 flex flex-col justify-center">
                   <div className="text-center space-y-8">
                     <div className="flex justify-center">
-                      <div className="w-28 h-28 rounded-full bg-blue-50 flex items-center justify-center">
+                      <div className="w-28 h-28 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center shadow-sm">
                         {slides[currentSlide].icon}
                       </div>
                     </div>
                     <div className="space-y-4">
-                      <h2 className="text-4xl font-extrabold text-blue-900 leading-tight">
+                      <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight">
                         {slides[currentSlide].title}
                       </h2>
-                      <p className="text-xl text-gray-600 leading-relaxed">
+                      <p className="text-lg sm:text-xl text-slate-500 leading-relaxed">
                         {slides[currentSlide].description}
                       </p>
                     </div>
@@ -409,16 +413,16 @@ export default function Home() {
               {slides[currentSlide].type === "form" && slides[currentSlide].id === 5 && (
                 <div className="h-full flex flex-col space-y-14">
                   <div className="text-center space-y-4">
-                    <h2 className="text-4xl font-extrabold text-blue-900">
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-900">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-gray-600 text-lg">
+                    <p className="text-lg sm:text-xl text-slate-500">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
                   <div className="space-y-6">
-                    <h3 className="text-xs font-semibold text-gray-500 tracking-widest uppercase">
+                    <h3 className="text-xs font-semibold text-slate-500 tracking-widest uppercase">
                       Tipo de cliente
                     </h3>
                     <div className="flex flex-wrap gap-4 justify-center">
@@ -429,14 +433,14 @@ export default function Home() {
                           onClick={() => handleInputChange("clientType", type.value)}
                           className={`flex flex-col items-center p-6 rounded-3xl transition-all duration-300 min-w-[110px] ${
                             formData.clientType === type.value
-                              ? "bg-blue-600 border-2 border-blue-600 shadow-lg shadow-blue-600/20"
-                              : "bg-gray-50/80 border border-gray-200 hover:border-gray-300"
+                              ? "bg-gradient-to-br from-blue-600 to-blue-500 border-2 border-blue-600 shadow-lg shadow-blue-600/20"
+                              : "bg-white/80 border border-gray-200 hover:border-gray-300 shadow-sm"
                           }`}
                         >
                           <div className={`mb-3 p-4 rounded-full ${
                             formData.clientType === type.value
                               ? "bg-white"
-                              : "bg-white"
+                              : "bg-gray-50"
                           }`}>
                             {type.icon}
                           </div>
@@ -793,24 +797,24 @@ export default function Home() {
         </div>
 
         {/* Botones de navegación - Parte inferior fija */}
-        <div className="flex-shrink-0 py-6 px-8 border-t border-gray-200/50">
+        <div className="flex-shrink-0 py-6 px-8 border-t border-gray-200/30">
           <div className="flex items-center justify-between">
             <button
               onClick={handlePrevious}
               disabled={currentSlide === 0}
-              className="px-5 py-2.5 text-gray-600 font-medium rounded-3xl border-2 border-gray-300 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-2"
+              className="px-5 py-2.5 text-gray-600 font-medium rounded-full border-2 border-gray-300 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-2 shadow-sm"
             >
               <ArrowLeft className="w-5 h-5" strokeWidth={1} />
             </button>
             
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-slate-400">
               Desliza para navegar
             </div>
             
             <button
               onClick={handleNext}
               disabled={currentSlide === slides.length - 1 || !isNextButtonEnabled()}
-              className={`px-6 py-2.5 text-white font-medium rounded-3xl disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-2 ${getNextButtonColor()}`}
+              className={`px-6 py-2.5 text-white font-medium rounded-full disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-2 shadow-md ${getNextButtonColor()}`}
             >
               <ArrowRight className="w-5 h-5" strokeWidth={1} />
             </button>
