@@ -4,23 +4,23 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import { 
   Droplets, 
-  Zap, 
   DollarSign, 
   CheckCircle, 
-  ChevronLeft, 
-  ChevronRight,
-  MessageCircle,
-  Home as HomeIcon,
   Building,
   Store,
   MapPin,
   ArrowRight,
   ArrowLeft,
-  Check
+  MessageCircle,
+  ChevronRight,
+  Home,
+  Sparkles,
+  Shield,
+  Zap
 } from "lucide-react";
 
 type SlideType = "hero" | "benefit" | "form" | "contact" | "summary";
-type ClientType = "hogar" | "oficina" | "negocio";
+type ClientType = "oficina" | "negocio";
 type ZoneType = "centro" | "playas" | "otay" | "mesa" | "rio" | "otros";
 type FrequencyType = "semana" | "dia";
 
@@ -40,7 +40,7 @@ interface FormData {
   zone: ZoneType | "";
 }
 
-export default function Home() {
+export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
   const [formData, setFormData] = useState<FormData>({
@@ -59,15 +59,15 @@ export default function Home() {
       id: 1,
       type: "hero",
       title: "BIOSANA",
-      description: "Agua purificada premium",
-      icon: <Droplets className="w-24 h-24 text-blue-600" strokeWidth={1} />
+      description: "Agua purificada premium para empresas",
+      icon: <Droplets className="w-24 h-24 text-blue-500" strokeWidth={1.5} />
     },
     {
       id: 2,
       type: "benefit",
       title: "Más de 10 años de experiencia",
       description: "Garantizando hidratación de calidad en Tijuana",
-      icon: <CheckCircle className="w-20 h-20 text-blue-600" strokeWidth={1} />
+      icon: <CheckCircle className="w-20 h-20 text-emerald-500" strokeWidth={1.5} />
     },
     {
       id: 3,
@@ -79,8 +79,8 @@ export default function Home() {
       id: 4,
       type: "benefit",
       title: "Precios competitivos",
-      description: "Calidad premium",
-      icon: <DollarSign className="w-20 h-20 text-blue-600" strokeWidth={1} />
+      description: "Calidad premium al mejor costo",
+      icon: <DollarSign className="w-20 h-20 text-amber-500" strokeWidth={1.5} />
     },
     {
       id: 5,
@@ -115,17 +115,27 @@ export default function Home() {
   ];
 
   const clientTypes = [
-    { value: "oficina" as ClientType, label: "Oficina", icon: <Building className="w-6 h-6" strokeWidth={1} /> },
-    { value: "negocio" as ClientType, label: "Negocio/Comercio", icon: <Store className="w-6 h-6" strokeWidth={1} /> }
+    { 
+      value: "oficina" as ClientType, 
+      label: "Oficina", 
+      icon: <Building className="w-6 h-6 text-blue-500" strokeWidth={1.5} />,
+      color: "from-blue-100 to-blue-50"
+    },
+    { 
+      value: "negocio" as ClientType, 
+      label: "Negocio", 
+      icon: <Store className="w-6 h-6 text-emerald-500" strokeWidth={1.5} />,
+      color: "from-emerald-100 to-emerald-50"
+    }
   ];
 
   const zones = [
-    { value: "otay" as ZoneType, label: "Otay", icon: <MapPin className="w-5 h-5" strokeWidth={1} /> },
-    { value: "playas" as ZoneType, label: "Playas", icon: <MapPin className="w-5 h-5" strokeWidth={1} /> },
-    { value: "centro" as ZoneType, label: "Centro", icon: <MapPin className="w-5 h-5" strokeWidth={1} /> },
-    { value: "rio" as ZoneType, label: "Río", icon: <MapPin className="w-5 h-5" strokeWidth={1} /> },
-    { value: "mesa" as ZoneType, label: "La Mesa", icon: <MapPin className="w-5 h-5" strokeWidth={1} /> },
-    { value: "otros" as ZoneType, label: "Otra zona...", icon: <MapPin className="w-5 h-5" strokeWidth={1} /> }
+    { value: "otay" as ZoneType, label: "Otay", icon: <MapPin className="w-5 h-5" strokeWidth={1.5} /> },
+    { value: "playas" as ZoneType, label: "Playas", icon: <MapPin className="w-5 h-5" strokeWidth={1.5} /> },
+    { value: "centro" as ZoneType, label: "Centro", icon: <MapPin className="w-5 h-5" strokeWidth={1.5} /> },
+    { value: "rio" as ZoneType, label: "Río", icon: <MapPin className="w-5 h-5" strokeWidth={1.5} /> },
+    { value: "mesa" as ZoneType, label: "La Mesa", icon: <MapPin className="w-5 h-5" strokeWidth={1.5} /> },
+    { value: "otros" as ZoneType, label: "Otra zona...", icon: <MapPin className="w-5 h-5" strokeWidth={1.5} /> }
   ];
 
   const handleDragEnd = (event: any, info: PanInfo) => {
@@ -140,36 +150,23 @@ export default function Home() {
   };
 
   const handleNext = () => {
-    // Validación por tipo de slide
     const currentSlideData = slides[currentSlide];
     
     if (currentSlideData.type === "form" && currentSlideData.id === 5) {
-      // Validación para Tipo de Cliente
-      if (!formData.clientType) {
-        return; // No avanza si no hay tipo de cliente seleccionado
-      }
+      if (!formData.clientType) return;
     }
     
     if (currentSlideData.type === "form" && currentSlideData.id === 6) {
-      // Validación para Ubicación (ahora es slide 6)
-      if (!formData.zone || (formData.zone === "otros" && !customZone.trim())) {
-        return; // No avanza si no hay zona seleccionada o zona personalizada vacía
-      }
+      if (!formData.zone || (formData.zone === "otros" && !customZone.trim())) return;
     }
     
     if (currentSlideData.type === "form" && currentSlideData.id === 7) {
-      // Validación para Consumo (ahora es slide 7)
       const minimum = frequency === "dia" ? 10 : getMinimumConsumption();
-      if (!formData.weeklyConsumption || formData.weeklyConsumption < minimum) {
-        return; // No avanza si no hay consumo o es menor al mínimo requerido
-      }
+      if (!formData.weeklyConsumption || formData.weeklyConsumption < minimum) return;
     }
     
     if (currentSlideData.type === "contact") {
-      // Validación para Datos de Contacto
-      if (!formData.name.trim() || !formData.phone.trim() || formData.phone.length < 10) {
-        return; // No avanza si nombre o teléfono están vacíos o teléfono muy corto
-      }
+      if (!formData.name.trim() || !formData.phone.trim() || formData.phone.length < 10) return;
     }
     
     if (currentSlide < slides.length - 1) {
@@ -185,13 +182,6 @@ export default function Home() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.clientType && formData.weeklyConsumption && formData.zone) {
-      setIsSubmitted(true);
-    }
-  };
-
   const handleInputChange = (field: keyof FormData, value: string | number) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
@@ -200,11 +190,10 @@ export default function Home() {
     const clientTypeLabel = clientTypes.find(t => t.value === formData.clientType)?.label || formData.clientType;
     const zoneLabel = formData.zone === "otros" && customZone ? customZone : zones.find(z => z.value === formData.zone)?.label || formData.zone;
     
-    // Cálculo de impacto para frecuencia diaria
     let consumoText = "";
     if (frequency === "dia" && formData.weeklyConsumption) {
       const consumoDiario = formData.weeklyConsumption;
-      const consumoSemanal = consumoDiario * 6; // Lunes a sábado
+      const consumoSemanal = consumoDiario * 6;
       consumoText = `${consumoDiario} garrafones/día (${consumoSemanal} garrafones/semana)`;
     } else {
       consumoText = `${formData.weeklyConsumption} garrafones/semana`;
@@ -219,23 +208,15 @@ export default function Home() {
     return `https://wa.me/${whatsappNumber}?text=${message}`;
   };
 
-  // Función para determinar el mínimo dinámico basado en la zona
   const getMinimumConsumption = () => {
-    // Zonas Locales: La Mesa, Centro, Río
     const localZones: ZoneType[] = ["mesa", "centro", "rio"];
-    // Zonas Extendidas: Playas, Otay, Otra zona
     const extendedZones: ZoneType[] = ["playas", "otay", "otros"];
     
-    if (formData.zone && localZones.includes(formData.zone)) {
-      return 15; // Mínimo para zonas locales
-    } else if (formData.zone && extendedZones.includes(formData.zone)) {
-      return 25; // Mínimo para zonas extendidas
-    }
-    
-    return 15; // Valor por defecto si no hay zona seleccionada
+    if (formData.zone && localZones.includes(formData.zone)) return 15;
+    if (formData.zone && extendedZones.includes(formData.zone)) return 25;
+    return 15;
   };
 
-  // Función para obtener el mensaje de advertencia dinámico
   const getZoneWarningMessage = () => {
     const minimum = getMinimumConsumption();
     const localZones: ZoneType[] = ["mesa", "centro", "rio"];
@@ -245,45 +226,39 @@ export default function Home() {
     } else if (formData.zone) {
       return `Debido a la distancia, el suministro mínimo para esta zona es de ${minimum} garrafones`;
     }
-    
     return "Suministro mínimo para rutas corporativas: 15 garrafones";
   };
 
-  // Función para determinar si el botón "Siguiente" debe estar habilitado
   const isNextButtonEnabled = () => {
     const currentSlideData = slides[currentSlide];
     
     if (currentSlideData.type === "form" && currentSlideData.id === 5) {
-      return !!formData.clientType; // Habilitado si hay tipo de cliente seleccionado
+      return !!formData.clientType;
     }
     
     if (currentSlideData.type === "form" && currentSlideData.id === 6) {
-      // Validación para Ubicación (ahora es slide 6)
       if (!formData.zone) return false;
-      if (formData.zone === "otros") {
-        return !!customZone.trim(); // Habilitado si hay zona personalizada
-      }
-      return true; // Habilitado si hay zona seleccionada (no "otros")
+      if (formData.zone === "otros") return !!customZone.trim();
+      return true;
     }
     
     if (currentSlideData.type === "form" && currentSlideData.id === 7) {
-      // Validación para Consumo (ahora es slide 7)
       const minimum = frequency === "dia" ? 10 : getMinimumConsumption();
-      return !!formData.weeklyConsumption && formData.weeklyConsumption >= minimum; // Habilitado si hay consumo ≥ mínimo dinámico
+      return !!formData.weeklyConsumption && formData.weeklyConsumption >= minimum;
     }
     
     if (currentSlideData.type === "contact") {
-      return !!formData.name.trim() && !!formData.phone.trim() && formData.phone.length >= 10; // Habilitado si nombre y teléfono válidos
+      return !!formData.name.trim() && !!formData.phone.trim() && formData.phone.length >= 10;
     }
     
-    // Para otros slides (hero, benefit, summary) siempre habilitado
     return true;
   };
 
-  // Función para determinar el color del botón "Siguiente"
   const getNextButtonColor = () => {
     const isEnabled = isNextButtonEnabled();
-    return isEnabled ? "bg-green-600 hover:bg-green-700 shadow-lg shadow-green-600/20" : "bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20";
+    return isEnabled 
+      ? "bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 shadow-lg shadow-emerald-500/20" 
+      : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-lg shadow-blue-500/20";
   };
 
   useEffect(() => {
@@ -294,38 +269,57 @@ export default function Home() {
 
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0
+      x: direction > 0 ? 100 : -100,
+      opacity: 0,
+      y: 20
     }),
     center: {
       x: 0,
-      opacity: 1
+      opacity: 1,
+      y: 0
     },
     exit: (direction: number) => ({
-      x: direction < 0 ? 300 : -300,
-      opacity: 0
+      x: direction < 0 ? 100 : -100,
+      opacity: 0,
+      y: -20
     })
   };
 
   return (
-    <div className="min-h-[100dvh] w-full flex items-center justify-center bg-gradient-to-b from-blue-50 via-white to-blue-100 font-sans overflow-hidden">
-      {/* Contenedor principal adaptativo */}
-      <div className="w-full h-full sm:w-[450px] sm:h-[850px] flex flex-col justify-between bg-gradient-to-b from-white/90 via-white/80 to-white/70 backdrop-blur-3xl rounded-none sm:rounded-[40px] shadow-none sm:shadow-2xl sm:shadow-gray-400/20 overflow-hidden">
-        {/* Header - Marca a la izquierda */}
-        <div className="px-8 py-6 sm:px-10 sm:py-8 border-b border-gray-200/30">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center shadow-sm">
-              <Droplets className="w-5 h-5 sm:w-7 sm:h-7 text-blue-600" strokeWidth={1} />
+    <div className="min-h-dvh w-full flex items-center justify-center bg-linear-to-b from-slate-50 via-white to-slate-100 font-sans overflow-hidden">
+      {/* Contenedor principal - Tarjeta de cristal premium */}
+      <div className="w-full max-w-[400px] h-full sm:h-[90vh] flex flex-col bg-white/80 backdrop-blur-md rounded-[40px] shadow-2xl shadow-blue-500/5 overflow-hidden mx-4">
+        {/* Barra de progreso estilo Instagram Stories */}
+        <div className="flex gap-1 px-8 pt-6 pb-4">
+          {slides.map((slide, index) => (
+            <div
+              key={slide.id}
+              className="flex-1 h-1 bg-slate-200 rounded-full overflow-hidden"
+            >
+              <div
+                className={`h-full bg-linear-to-r from-blue-500 to-blue-600 transition-all duration-300 ${
+                  index < currentSlide ? 'w-full' : index === currentSlide ? 'w-1/2' : 'w-0'
+                }`}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Header minimalista y elegante */}
+        <div className="px-8 pb-4">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-linear-to-br from-blue-100 to-blue-50 flex items-center justify-center">
+              <Droplets className="w-4 h-4 text-blue-500" strokeWidth={2} />
             </div>
             <div className="text-left">
-              <h1 className="text-lg sm:text-xl font-bold text-blue-900">BIOSANA</h1>
-              <p className="text-xs text-slate-500">AGUA PURIFICADA PREMIUM</p>
+              <h1 className="text-sm font-black text-slate-900">BIOSANA</h1>
+              <p className="text-[10px] text-slate-400">Agua premium</p>
             </div>
           </div>
         </div>
 
-        {/* Contenido central - Scroll natural */}
-        <div className="flex-1 overflow-y-auto">
+        {/* Contenido central */}
+        <div className="flex-1 overflow-y-auto px-8">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentSlide}
@@ -336,53 +330,55 @@ export default function Home() {
               exit="exit"
               transition={{
                 x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.2 }
+                opacity: { duration: 0.3 },
+                y: { duration: 0.3 }
               }}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.1}
               onDragEnd={handleDragEnd}
-              className="px-8 py-10 sm:px-10 sm:py-12"
+              className="py-8"
             >
+              {/* Hero Slide */}
               {slides[currentSlide].type === "hero" && (
-                <div className="h-full flex flex-col items-center justify-center text-center space-y-12 bg-transparent">
-                  {/* Emoji Hero - Animación de flotación suave */}
+                <div className="h-full flex flex-col items-center justify-center text-center space-y-12">
                   <div className="relative">
-                    <div className="text-8xl sm:text-9xl animate-[float_3s_ease-in-out_infinite]">
+                    <div className="text-7xl animate-[float_4s_ease-in-out_infinite]">
                       💧
                     </div>
                     <style jsx>{`
                       @keyframes float {
                         0%, 100% { transform: translateY(0px); }
-                        50% { transform: translateY(-12px); }
+                        50% { transform: translateY(-15px); }
                       }
                     `}</style>
                   </div>
 
                   <div className="space-y-6">
-                    <h2 className="text-3xl sm:text-5xl font-extrabold text-blue-900 mb-2 leading-tight">
+                    <h2 className="text-3xl font-black text-slate-900 leading-tight">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-lg sm:text-xl text-slate-500 leading-relaxed">
+                    <p className="text-base text-slate-400 leading-relaxed">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                 </div>
               )}
 
+              {/* Benefit Slides */}
               {slides[currentSlide].type === "benefit" && slides[currentSlide].id === 2 && (
                 <div className="flex-1 flex flex-col justify-center">
-                  <div className="text-center space-y-8">
+                  <div className="text-center space-y-10">
                     <div className="flex justify-center">
-                      <div className="w-28 h-28 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center shadow-sm">
+                      <div className="w-20 h-20 rounded-full bg-linear-to-br from-emerald-50 to-emerald-100/50 flex items-center justify-center">
                         {slides[currentSlide].icon}
                       </div>
                     </div>
-                    <div className="space-y-4">
-                      <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight">
+                    <div className="space-y-6">
+                      <h2 className="text-2xl font-black text-slate-900 leading-tight">
                         {slides[currentSlide].title}
                       </h2>
-                      <p className="text-lg sm:text-xl text-slate-500 leading-relaxed">
+                      <p className="text-base text-slate-400 leading-relaxed">
                         {slides[currentSlide].description}
                       </p>
                     </div>
@@ -392,17 +388,17 @@ export default function Home() {
 
               {slides[currentSlide].type === "benefit" && slides[currentSlide].id === 4 && (
                 <div className="flex-1 flex flex-col justify-center">
-                  <div className="text-center space-y-8">
+                  <div className="text-center space-y-10">
                     <div className="flex justify-center">
-                      <div className="w-28 h-28 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center shadow-sm">
+                      <div className="w-20 h-20 rounded-full bg-linear-to-br from-amber-50 to-amber-100/50 flex items-center justify-center">
                         {slides[currentSlide].icon}
                       </div>
                     </div>
-                    <div className="space-y-4">
-                      <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-900 leading-tight">
+                    <div className="space-y-6">
+                      <h2 className="text-2xl font-black text-slate-900 leading-tight">
                         {slides[currentSlide].title}
                       </h2>
-                      <p className="text-lg sm:text-xl text-slate-500 leading-relaxed">
+                      <p className="text-base text-slate-400 leading-relaxed">
                         {slides[currentSlide].description}
                       </p>
                     </div>
@@ -410,44 +406,88 @@ export default function Home() {
                 </div>
               )}
 
+              {/* Technology Slide */}
+              {slides[currentSlide].type === "benefit" && slides[currentSlide].id === 3 && (
+                <div className="flex-1 flex flex-col justify-center">
+                  <div className="text-center space-y-10">
+                    <div className="text-5xl">🔬</div>
+                    <div className="space-y-6">
+                      <h2 className="text-2xl font-black text-slate-900 leading-tight">
+                        {slides[currentSlide].title}
+                      </h2>
+                      <p className="text-base text-slate-400 leading-relaxed">
+                        {slides[currentSlide].description}
+                      </p>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 mt-8">
+                      <div className="bg-linear-to-br from-blue-50 to-white rounded-3xl p-5 flex flex-col items-center justify-center space-y-3">
+                        <div className="text-3xl">🔬</div>
+                        <h4 className="font-bold text-slate-900 text-sm text-center">Microfiltración</h4>
+                        <p className="text-xs text-slate-400 text-center">Sedimentos</p>
+                      </div>
+                      
+                      <div className="bg-linear-to-br from-blue-50 to-white rounded-3xl p-5 flex flex-col items-center justify-center space-y-3">
+                        <div className="text-3xl">🌫️</div>
+                        <h4 className="font-bold text-slate-900 text-sm text-center">Carbón activado</h4>
+                        <p className="text-xs text-slate-400 text-center">Granular</p>
+                      </div>
+                      
+                      <div className="bg-linear-to-br from-blue-50 to-white rounded-3xl p-5 flex flex-col items-center justify-center space-y-3">
+                        <div className="text-3xl">💡</div>
+                        <h4 className="font-bold text-slate-900 text-sm text-center">Luz UV</h4>
+                        <p className="text-xs text-slate-400 text-center">Esterilización</p>
+                      </div>
+                      
+                      <div className="bg-linear-to-br from-blue-50 to-white rounded-3xl p-5 flex flex-col items-center justify-center space-y-3">
+                        <div className="text-3xl">🌊</div>
+                        <h4 className="font-bold text-slate-900 text-sm text-center">Ozonización</h4>
+                        <p className="text-xs text-slate-400 text-center">Pulido final</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Form Slides */}
               {slides[currentSlide].type === "form" && slides[currentSlide].id === 5 && (
-                <div className="h-full flex flex-col space-y-14">
+                <div className="h-full flex flex-col space-y-10">
                   <div className="text-center space-y-4">
-                    <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-900">
+                    <h2 className="text-2xl font-black text-slate-900">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-lg sm:text-xl text-slate-500">
+                    <p className="text-sm text-slate-400">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
                   <div className="space-y-6">
-                    <h3 className="text-xs font-semibold text-slate-500 tracking-widest uppercase">
+                    <h3 className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
                       Tipo de cliente
                     </h3>
-                    <div className="flex flex-wrap gap-4 justify-center">
+                    <div className="flex flex-col gap-4">
                       {clientTypes.map((type) => (
                         <button
                           key={type.value}
                           type="button"
                           onClick={() => handleInputChange("clientType", type.value)}
-                          className={`flex flex-col items-center p-6 rounded-3xl transition-all duration-300 min-w-[110px] ${
+                          className={`flex items-center gap-4 p-5 rounded-3xl transition-all duration-300 ${
                             formData.clientType === type.value
-                              ? "bg-gradient-to-br from-blue-600 to-blue-500 border-2 border-blue-600 shadow-lg shadow-blue-600/20"
-                              : "bg-white/80 border border-gray-200 hover:border-gray-300 shadow-sm"
+                              ? "bg-linear-to-r from-blue-500 to-blue-600 shadow-lg shadow-blue-500/20"
+                              : "bg-blue-50 hover:bg-blue-100"
                           }`}
                         >
-                          <div className={`mb-3 p-4 rounded-full ${
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                             formData.clientType === type.value
-                              ? "bg-white"
-                              : "bg-gray-50"
+                              ? "bg-white/20"
+                              : "bg-white"
                           }`}>
                             {type.icon}
                           </div>
-                          <span className={`text-sm font-medium ${
+                          <span className={`text-base font-bold ${
                             formData.clientType === type.value
                               ? "text-white"
-                              : "text-gray-700"
+                              : "text-slate-900"
                           }`}>
                             {type.label}
                           </span>
@@ -459,21 +499,21 @@ export default function Home() {
               )}
 
               {slides[currentSlide].type === "form" && slides[currentSlide].id === 6 && (
-                <div className="h-full flex flex-col space-y-14">
+                <div className="h-full flex flex-col space-y-10">
                   <div className="text-center space-y-4">
-                    <h2 className="text-4xl font-extrabold text-blue-900">
+                    <h2 className="text-2xl font-black text-slate-900">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-gray-600 text-lg">
+                    <p className="text-sm text-slate-400">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
                   <div className="space-y-6">
-                    <h3 className="text-xs font-semibold text-gray-500 tracking-widest uppercase">
+                    <h3 className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
                       Zona en Tijuana
                     </h3>
-                    <div className="flex flex-wrap gap-3 justify-center">
+                    <div className="grid grid-cols-2 gap-3">
                       {zones.map((zone) => (
                         <button
                           key={zone.value}
@@ -484,14 +524,14 @@ export default function Home() {
                               setCustomZone("");
                             }
                           }}
-                          className={`px-6 py-4 rounded-full transition-all duration-300 flex items-center gap-3 ${
+                          className={`p-5 rounded-3xl transition-all duration-300 flex flex-col items-center justify-center space-y-2 ${
                             formData.zone === zone.value
-                              ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-                              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                              ? "bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/20"
+                              : "bg-blue-50 hover:bg-blue-100 text-slate-900"
                           }`}
                         >
                           {zone.icon}
-                          <span className="font-medium">
+                          <span className="text-sm font-bold">
                             {zone.label}
                           </span>
                         </button>
@@ -499,15 +539,15 @@ export default function Home() {
                     </div>
                     
                     {formData.zone === "otros" && (
-                      <div className="mt-6 space-y-4">
-                        <label className="text-sm font-medium text-gray-700">
+                      <div className="mt-8 space-y-4">
+                        <label className="text-sm font-bold text-slate-700">
                           Escribe tu colonia o zona específica
                         </label>
                         <input
                           type="text"
                           value={customZone}
                           onChange={(e) => setCustomZone(e.target.value)}
-                          className="w-full p-4 text-lg border-2 border-gray-300 rounded-3xl bg-white/50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                          className="w-full p-5 text-base border-2 border-blue-100 rounded-3xl bg-blue-50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-slate-400"
                           placeholder="Ej: Colonia Libertad, Zona Río, etc."
                         />
                       </div>
@@ -516,78 +556,32 @@ export default function Home() {
                 </div>
               )}
 
-              {slides[currentSlide].type === "benefit" && slides[currentSlide].id === 3 && (
-                <div className="flex-1 flex flex-col justify-center">
-                  <div className="text-center space-y-8">
-                    {/* Icono central - Cambiado a filtro de agua */}
-                    <div className="text-7xl">💧</div>
-                    
-                    {/* Título principal */}
-                    <div className="space-y-2">
-                      <h2 className="text-3xl font-extrabold text-blue-900 leading-tight">
-                        {slides[currentSlide].title}
-                      </h2>
-                      <p className="text-lg text-gray-600 leading-relaxed">
-                        {slides[currentSlide].description}
-                      </p>
-                    </div>
-                    
-                    {/* Cuadrícula de 4 etapas - Diseño mejorado */}
-                    <div className="grid grid-cols-2 gap-4 max-w-xs mx-auto">
-                      <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-4 flex flex-col items-center justify-center space-y-2 shadow-sm">
-                        <div className="text-3xl">🔬</div>
-                        <h4 className="font-semibold text-blue-900 text-sm text-center">Microfiltración</h4>
-                        <p className="text-xs text-blue-600 text-center">Sedimentos</p>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-4 flex flex-col items-center justify-center space-y-2 shadow-sm">
-                        <div className="text-3xl">🌫️</div>
-                        <h4 className="font-semibold text-blue-900 text-sm text-center">Carbón activado</h4>
-                        <p className="text-xs text-blue-600 text-center">Granular</p>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-4 flex flex-col items-center justify-center space-y-2 shadow-sm">
-                        <div className="text-3xl">💡</div>
-                        <h4 className="font-semibold text-blue-900 text-sm text-center">Luz UV</h4>
-                        <p className="text-xs text-blue-600 text-center">Esterilización</p>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-4 flex flex-col items-center justify-center space-y-2 shadow-sm">
-                        <div className="text-3xl">🌊</div>
-                        <h4 className="font-semibold text-blue-900 text-sm text-center">Ozonización</h4>
-                        <p className="text-xs text-blue-600 text-center">Pulido final</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
               {slides[currentSlide].type === "form" && slides[currentSlide].id === 7 && (
-                <div className="h-full flex flex-col space-y-14">
+                <div className="h-full flex flex-col space-y-10">
                   <div className="text-center space-y-4">
-                    <h2 className="text-4xl font-extrabold text-blue-900">
+                    <h2 className="text-2xl font-black text-slate-900">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-gray-600 text-lg">
+                    <p className="text-sm text-slate-400">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
                   <div className="space-y-6">
-                    <h3 className="text-xs font-semibold text-gray-500 tracking-widest uppercase">
+                    <h3 className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
                       Volumen corporativo
                     </h3>
                     
                     {/* Selector de Frecuencia */}
                     <div className="flex justify-center">
-                      <div className="inline-flex rounded-full bg-gray-100 p-1">
+                      <div className="inline-flex rounded-full bg-blue-50 p-1">
                         <button
                           type="button"
                           onClick={() => setFrequency("semana")}
-                          className={`px-6 py-2 rounded-full transition-all duration-300 ${
+                          className={`px-6 py-2.5 rounded-full transition-all duration-300 text-sm font-bold ${
                             frequency === "semana"
-                              ? "bg-blue-600 text-white shadow-md"
-                              : "text-gray-700 hover:text-gray-900"
+                              ? "bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-md"
+                              : "text-slate-700 hover:text-slate-900"
                           }`}
                         >
                           Por Semana
@@ -595,10 +589,10 @@ export default function Home() {
                         <button
                           type="button"
                           onClick={() => setFrequency("dia")}
-                          className={`px-6 py-2 rounded-full transition-all duration-300 ${
+                          className={`px-6 py-2.5 rounded-full transition-all duration-300 text-sm font-bold ${
                             frequency === "dia"
-                              ? "bg-blue-600 text-white shadow-md"
-                              : "text-gray-700 hover:text-gray-900"
+                              ? "bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-md"
+                              : "text-slate-700 hover:text-slate-900"
                           }`}
                         >
                           Por Día
@@ -606,7 +600,7 @@ export default function Home() {
                       </div>
                     </div>
                     
-                    <div className="flex flex-col items-center space-y-4">
+                    <div className="flex flex-col items-center space-y-6">
                       <input
                         type="number"
                         min={frequency === "dia" ? 10 : getMinimumConsumption()}
@@ -619,15 +613,15 @@ export default function Home() {
                             handleInputChange("weeklyConsumption", value);
                           }
                         }}
-                        className="w-full max-w-[220px] p-5 text-3xl text-center border-2 border-gray-300 rounded-3xl bg-white/50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                        className="w-full max-w-[200px] p-5 text-2xl font-black text-center border-2 border-blue-100 rounded-3xl bg-blue-50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-slate-400"
                         placeholder={frequency === "dia" ? "10" : getMinimumConsumption().toString()}
                       />
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-slate-400">
                         Garrafones por {frequency === "dia" ? "día" : "semana"} (mínimo {frequency === "dia" ? 10 : getMinimumConsumption()})
                       </p>
                       
-                      {/* Opciones de cantidad rápidas - actualizadas dinámicamente */}
-                      <div className="flex flex-wrap gap-3 justify-center mt-4">
+                      {/* Opciones de cantidad rápidas */}
+                      <div className="flex flex-wrap gap-2 justify-center mt-6">
                         {(() => {
                           const minimum = frequency === "dia" ? 10 : getMinimumConsumption();
                           let ranges;
@@ -654,13 +648,13 @@ export default function Home() {
                                 key={range}
                                 type="button"
                                 onClick={() => handleInputChange("weeklyConsumption", min)}
-                                className={`px-5 py-3 rounded-full transition-all duration-300 ${
+                                className={`px-5 py-2.5 rounded-full transition-all duration-300 text-sm font-bold ${
                                   isSelected
-                                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                    ? "bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/20"
+                                    : "bg-blue-50 text-slate-700 hover:bg-blue-100"
                                 }`}
                               >
-                                <span className="font-medium">{range}</span>
+                                <span className="font-bold">{range}</span>
                               </button>
                             );
                           });
@@ -668,8 +662,8 @@ export default function Home() {
                       </div>
                       
                       {/* Aviso de pedido mínimo dinámico */}
-                      <div className="mt-6 text-center">
-                        <p className="text-sm text-gray-500 italic">
+                      <div className="mt-8 text-center">
+                        <p className="text-xs text-slate-400 italic">
                           {frequency === "dia" 
                             ? "Suministro mínimo diario: 10 garrafones (recurrencia justifica el viaje)" 
                             : getZoneWarningMessage()}
@@ -681,39 +675,39 @@ export default function Home() {
               )}
 
               {slides[currentSlide].type === "contact" && (
-                <div className="h-full flex flex-col space-y-14">
+                <div className="h-full flex flex-col space-y-10">
                   <div className="text-center space-y-4">
-                    <h2 className="text-4xl font-extrabold text-blue-900">
+                    <h2 className="text-2xl font-black text-slate-900">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-gray-600 text-lg">
+                    <p className="text-sm text-slate-400">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
-                  <div className="space-y-8">
+                  <div className="space-y-6">
                     <div className="space-y-4">
-                      <label className="text-sm font-medium text-gray-700">
+                      <label className="text-sm font-bold text-slate-700">
                         Nombre completo
                       </label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={(e) => handleInputChange("name", e.target.value)}
-                        className="w-full p-5 text-lg border-2 border-gray-300 rounded-3xl bg-white/50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                        className="w-full p-5 text-base border-2 border-blue-100 rounded-3xl bg-blue-50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-slate-400"
                         placeholder="Tu nombre"
                       />
                     </div>
                     
                     <div className="space-y-4">
-                      <label className="text-sm font-medium text-gray-700">
+                      <label className="text-sm font-bold text-slate-700">
                         Número de teléfono
                       </label>
                       <input
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => handleInputChange("phone", e.target.value)}
-                        className="w-full p-5 text-lg border-2 border-gray-300 rounded-3xl bg-white/50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                        className="w-full p-5 text-base border-2 border-blue-100 rounded-3xl bg-blue-50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-slate-400"
                         placeholder="664 123 4567"
                       />
                     </div>
@@ -722,41 +716,41 @@ export default function Home() {
               )}
 
               {slides[currentSlide].type === "summary" && (
-                <div className="h-full flex flex-col space-y-14">
+                <div className="h-full flex flex-col space-y-10">
                   <div className="text-center space-y-4">
-                    <h2 className="text-4xl font-extrabold text-blue-900">
+                    <h2 className="text-2xl font-black text-slate-900">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-gray-600 text-lg">
+                    <p className="text-sm text-slate-400">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
-                  <div className="space-y-8">
-                    <div className="bg-gray-50/50 rounded-3xl p-8 space-y-6">
-                      <h3 className="text-lg font-semibold text-gray-900">
+                  <div className="space-y-6">
+                    <div className="bg-linear-to-br from-blue-50 to-white rounded-3xl p-6 space-y-5">
+                      <h3 className="text-lg font-black text-slate-900">
                         Resumen de tu cotización
                       </h3>
                       
                       <div className="space-y-4">
                         {formData.name && (
                           <div className="flex justify-between items-center">
-                            <span className="text-gray-600">Nombre:</span>
-                            <span className="font-medium text-gray-900">{formData.name}</span>
+                            <span className="text-slate-400 text-sm">Nombre:</span>
+                            <span className="font-bold text-slate-900">{formData.name}</span>
                           </div>
                         )}
                         
                         {formData.phone && (
                           <div className="flex justify-between items-center">
-                            <span className="text-gray-600">Teléfono:</span>
-                            <span className="font-medium text-gray-900">{formData.phone}</span>
+                            <span className="text-slate-400 text-sm">Teléfono:</span>
+                            <span className="font-bold text-slate-900">{formData.phone}</span>
                           </div>
                         )}
                         
                         {formData.clientType && (
                           <div className="flex justify-between items-center">
-                            <span className="text-gray-600">Tipo de cliente:</span>
-                            <span className="font-medium text-gray-900">
+                            <span className="text-slate-400 text-sm">Tipo de cliente:</span>
+                            <span className="font-bold text-slate-900">
                               {clientTypes.find(t => t.value === formData.clientType)?.label}
                             </span>
                           </div>
@@ -764,15 +758,15 @@ export default function Home() {
                         
                         {formData.weeklyConsumption && (
                           <div className="flex justify-between items-center">
-                            <span className="text-gray-600">Consumo semanal:</span>
-                            <span className="font-medium text-gray-900">{formData.weeklyConsumption} garrafones</span>
+                            <span className="text-slate-400 text-sm">Consumo:</span>
+                            <span className="font-bold text-slate-900">{formData.weeklyConsumption} garrafones/{frequency === "dia" ? "día" : "semana"}</span>
                           </div>
                         )}
                         
                         {formData.zone && (
                           <div className="flex justify-between items-center">
-                            <span className="text-gray-600">Zona en Tijuana:</span>
-                            <span className="font-medium text-gray-900">
+                            <span className="text-slate-400 text-sm">Zona:</span>
+                            <span className="font-bold text-slate-900">
                               {zones.find(z => z.value === formData.zone)?.label}
                             </span>
                           </div>
@@ -784,9 +778,9 @@ export default function Home() {
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-5 bg-green-600 text-white font-bold rounded-3xl hover:bg-green-700 transition-all shadow-xl shadow-green-600/30 text-lg flex items-center justify-center gap-3"
+                      className="w-full py-5 bg-linear-to-r from-emerald-500 to-emerald-600 text-white font-black rounded-3xl hover:from-emerald-600 hover:to-emerald-700 transition-all shadow-lg shadow-emerald-500/20 text-base flex items-center justify-center gap-3"
                     >
-                      <MessageCircle className="w-6 h-6" strokeWidth={1} />
+                      <MessageCircle className="w-5 h-5" strokeWidth={2} />
                       Enviar por WhatsApp
                     </a>
                   </div>
@@ -796,27 +790,23 @@ export default function Home() {
           </AnimatePresence>
         </div>
 
-        {/* Botones de navegación - Parte inferior fija */}
-        <div className="flex-shrink-0 py-6 px-8 border-t border-gray-200/30">
+        {/* Botones de navegación minimalistas */}
+        <div className="shrink-0 py-6 px-8">
           <div className="flex items-center justify-between">
             <button
               onClick={handlePrevious}
               disabled={currentSlide === 0}
-              className="px-5 py-2.5 text-gray-600 font-medium rounded-full border-2 border-gray-300 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-2 shadow-sm"
+              className="w-14 h-14 rounded-full bg-blue-50 text-slate-700 hover:bg-blue-100 disabled:opacity-20 disabled:cursor-not-allowed transition-all flex items-center justify-center"
             >
-              <ArrowLeft className="w-5 h-5" strokeWidth={1} />
+              <ArrowLeft className="w-5 h-5" strokeWidth={2} />
             </button>
-            
-            <div className="text-sm text-slate-400">
-              Desliza para navegar
-            </div>
             
             <button
               onClick={handleNext}
               disabled={currentSlide === slides.length - 1 || !isNextButtonEnabled()}
-              className={`px-6 py-2.5 text-white font-medium rounded-full disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-2 shadow-md ${getNextButtonColor()}`}
+              className={`w-14 h-14 rounded-full transition-all flex items-center justify-center shadow-lg disabled:opacity-20 disabled:cursor-not-allowed ${getNextButtonColor()}`}
             >
-              <ArrowRight className="w-5 h-5" strokeWidth={1} />
+              <ArrowRight className="w-5 h-5 text-white" strokeWidth={2} />
             </button>
           </div>
         </div>
