@@ -499,19 +499,23 @@ export default function HomePage() {
                           key={type.value}
                           type="button"
                           onClick={() => handleInputChange("clientType", type.value)}
-                          className={`flex flex-col items-center justify-center gap-3 p-6 rounded-3xl transition-all duration-300 active:scale-95 ${
+                          className={`flex flex-col items-center justify-center gap-3 p-6 rounded-[28px] transition-all duration-300 active:scale-95 ${
                             formData.clientType === type.value
-                              ? "bg-blue-50/50 border-2 border-[#007AFF] shadow-lg shadow-blue-500/10"
-                              : "bg-transparent border border-slate-200 hover:border-slate-300 hover:bg-slate-50/30"
+                              ? "bg-blue-100/70 border-2 border-blue-300 shadow-lg shadow-blue-200/50"
+                              : "bg-slate-50/80 border-2 border-slate-200 hover:border-blue-200 hover:bg-blue-50/50"
                           }`}
                         >
-                          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-50 to-blue-100/50 flex items-center justify-center shrink-0">
-                            <Building className={`w-6 h-6 ${formData.clientType === type.value ? "text-[#007AFF]" : "text-slate-600"}`} strokeWidth={2} />
+                          <div className={`w-14 h-14 rounded-full flex items-center justify-center shrink-0 ${
+                            formData.clientType === type.value
+                              ? "bg-blue-200/60"
+                              : "bg-blue-100/50"
+                          }`}>
+                            <Building className={`w-6 h-6 ${formData.clientType === type.value ? "text-blue-600" : "text-blue-500"}`} strokeWidth={2} />
                           </div>
                           <span className={`text-sm font-semibold ${
                             formData.clientType === type.value
-                              ? "text-[#007AFF]"
-                              : "text-slate-700"
+                              ? "text-blue-700"
+                              : "text-slate-600"
                           }`}>
                             {type.label}
                           </span>
@@ -549,17 +553,17 @@ export default function HomePage() {
                               setCustomZone("");
                             }
                           }}
-                          className={`p-4 rounded-3xl transition-all duration-300 active:scale-95 flex flex-col items-center justify-center space-y-2 min-h-[90px] ${
+                          className={`p-4 rounded-[24px] transition-all duration-300 active:scale-95 flex flex-col items-center justify-center space-y-2 min-h-[90px] ${
                             formData.zone === zone.value
-                              ? "bg-blue-50/50 border-2 border-[#007AFF] shadow-lg shadow-blue-500/10"
-                              : "bg-transparent border border-slate-200 hover:border-slate-300 hover:bg-slate-50/30"
+                              ? "bg-emerald-100/70 border-2 border-emerald-300 shadow-lg shadow-emerald-200/50"
+                              : "bg-slate-50/80 border-2 border-slate-200 hover:border-emerald-200 hover:bg-emerald-50/50"
                           }`}
                         >
-                          <MapPin className={`w-5 h-5 shrink-0 ${formData.zone === zone.value ? "text-[#007AFF]" : "text-slate-600"}`} strokeWidth={2} />
+                          <MapPin className={`w-5 h-5 shrink-0 ${formData.zone === zone.value ? "text-emerald-600" : "text-emerald-500"}`} strokeWidth={2} />
                           <span className={`text-sm font-semibold ${
                             formData.zone === zone.value
-                              ? "text-[#007AFF]"
-                              : "text-slate-700"
+                              ? "text-emerald-700"
+                              : "text-slate-600"
                           }`}>
                             {zone.label}
                           </span>
@@ -604,14 +608,14 @@ export default function HomePage() {
                     
                     {/* Selector de Frecuencia */}
                     <div className="flex justify-center">
-                      <div className="inline-flex rounded-full bg-slate-100/80 p-1 border border-slate-200">
+                      <div className="inline-flex rounded-[24px] bg-purple-50/80 p-1.5 border-2 border-purple-200">
                         <button
                           type="button"
                           onClick={() => setFrequency("semana")}
-                          className={`px-5 py-2 rounded-full transition-all duration-300 active:scale-95 text-sm font-semibold ${
+                          className={`px-5 py-2 rounded-[20px] transition-all duration-300 active:scale-95 text-sm font-semibold ${
                             frequency === "semana"
-                              ? "bg-[#007AFF] text-white shadow-md"
-                              : "text-slate-700 hover:text-slate-900"
+                              ? "bg-purple-200/80 text-purple-700 shadow-md"
+                              : "text-purple-600 hover:text-purple-700 hover:bg-purple-100/50"
                           }`}
                         >
                           Por Semana
@@ -619,10 +623,10 @@ export default function HomePage() {
                         <button
                           type="button"
                           onClick={() => setFrequency("dia")}
-                          className={`px-5 py-2 rounded-full transition-all duration-300 active:scale-95 text-sm font-semibold ${
+                          className={`px-5 py-2 rounded-[20px] transition-all duration-300 active:scale-95 text-sm font-semibold ${
                             frequency === "dia"
-                              ? "bg-[#007AFF] text-white shadow-md"
-                              : "text-slate-700 hover:text-slate-900"
+                              ? "bg-purple-200/80 text-purple-700 shadow-md"
+                              : "text-purple-600 hover:text-purple-700 hover:bg-purple-100/50"
                           }`}
                         >
                           Por Día
@@ -678,10 +682,10 @@ export default function HomePage() {
                                 key={range}
                                 type="button"
                                 onClick={() => handleInputChange("weeklyConsumption", min)}
-                                className={`px-4 py-2 rounded-full transition-all duration-300 active:scale-95 text-xs font-semibold ${
+                                className={`px-4 py-2 rounded-[20px] transition-all duration-300 active:scale-95 text-xs font-semibold ${
                                   isSelected
-                                    ? "bg-blue-50/50 border-2 border-[#007AFF] text-[#007AFF] shadow-lg shadow-blue-500/10"
-                                    : "bg-transparent border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50/30"
+                                    ? "bg-amber-100/70 border-2 border-amber-300 text-amber-700 shadow-lg shadow-amber-200/50"
+                                    : "bg-slate-50/80 border-2 border-slate-200 text-slate-600 hover:border-amber-200 hover:bg-amber-50/50"
                                 }`}
                               >
                                 {range}
@@ -810,7 +814,7 @@ export default function HomePage() {
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-3.5 bg-gradient-to-r from-[#007AFF] to-[#0051D5] text-white font-bold rounded-full hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 transition-all text-sm flex items-center justify-center gap-2"
+                      className="w-full py-4 bg-gradient-to-r from-green-300 to-green-400 text-green-800 font-bold rounded-[24px] hover:shadow-lg hover:shadow-green-300/50 active:scale-95 transition-all text-sm flex items-center justify-center gap-2 border-2 border-green-400"
                     >
                       <MessageCircle className="w-5 h-5" strokeWidth={2} />
                       Enviar por WhatsApp
@@ -829,7 +833,7 @@ export default function HomePage() {
             <button
               onClick={handlePrevious}
               disabled={currentSlide === 0}
-              className="w-12 h-12 rounded-full bg-slate-100/80 text-slate-700 hover:bg-slate-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 border border-slate-200"
+              className="w-12 h-12 rounded-[20px] bg-slate-100/80 text-slate-600 hover:bg-slate-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 border-2 border-slate-200"
             >
               <ArrowLeft className="w-5 h-5" strokeWidth={2.5} />
             </button>
@@ -837,10 +841,10 @@ export default function HomePage() {
             <button
               onClick={handleNext}
               disabled={currentSlide === slides.length - 1 || !isNextButtonEnabled()}
-              className={`flex-1 max-w-[280px] py-3.5 rounded-full transition-all active:scale-95 flex items-center justify-center gap-2 font-semibold text-base disabled:opacity-30 disabled:cursor-not-allowed ${
+              className={`flex-1 max-w-[280px] py-3.5 rounded-[24px] transition-all active:scale-95 flex items-center justify-center gap-2 font-semibold text-base disabled:opacity-30 disabled:cursor-not-allowed ${
                 isNextButtonEnabled() && currentSlide < slides.length - 1
-                  ? "bg-gradient-to-r from-[#007AFF] to-[#0051D5] text-white hover:shadow-lg hover:shadow-blue-500/20"
-                  : "bg-slate-200 text-slate-400 border border-slate-300"
+                  ? "bg-gradient-to-r from-blue-300 to-blue-400 text-blue-800 hover:shadow-lg hover:shadow-blue-300/50 border-2 border-blue-400"
+                  : "bg-slate-200 text-slate-400 border-2 border-slate-300"
               }`}
             >
               <span>Continuar</span>
