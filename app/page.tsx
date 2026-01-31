@@ -286,9 +286,9 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-dvh w-full flex items-center justify-center bg-slate-50 font-sans overflow-hidden py-4">
-      {/* Contenedor principal con dimensiones fijas */}
-      <div className="w-full max-w-[420px] min-h-[650px] h-[650px] flex flex-col justify-between bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden mx-4">
+    <div className="min-h-dvh w-full flex items-center justify-center font-sans overflow-hidden py-4">
+      {/* Contenedor principal - Cristal transparente con efecto Apple */}
+      <div className="w-full max-w-[420px] min-h-[650px] h-[650px] flex flex-col justify-between bg-white/40 backdrop-blur-2xl rounded-[32px] shadow-[0_8px_30px_rgba(0,59,92,0.12)] border border-white/20 overflow-hidden mx-4">
         {/* Header fijo - Siempre arriba */}
         <div className="shrink-0">
           {/* Barra de progreso estilo Instagram Stories */}
@@ -296,10 +296,10 @@ export default function HomePage() {
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
-                className="flex-1 h-0.5 bg-slate-200 rounded-full overflow-hidden"
+                className="flex-1 h-0.5 bg-white/30 rounded-full overflow-hidden"
               >
                 <div
-                  className={`h-full bg-slate-900 transition-all duration-500 ${
+                  className={`h-full bg-gradient-to-r from-[#007AFF] to-[#00C6FF] transition-all duration-500 ${
                     index < currentSlide ? 'w-full' : index === currentSlide ? 'w-1/2' : 'w-0'
                   }`}
                 />
@@ -310,12 +310,12 @@ export default function HomePage() {
           {/* Header minimalista y elegante */}
           <div className="px-6 pb-3">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center shrink-0">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#007AFF] to-[#00C6FF] flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/30">
                 <Droplets className="w-5 h-5 text-white" strokeWidth={2} />
               </div>
               <div className="text-left">
-                <h1 className="text-base font-bold text-slate-900 tracking-tight">BIOSANA</h1>
-                <p className="text-[11px] text-slate-500 font-medium">Agua purificada premium</p>
+                <h1 className="text-base font-bold text-[#003B5C] tracking-tight">BIOSANA</h1>
+                <p className="text-[11px] text-[#8E8E93] font-medium">Agua purificada premium</p>
               </div>
             </div>
           </div>
@@ -359,10 +359,10 @@ export default function HomePage() {
                     </div>
 
                     <div className="space-y-4">
-                      <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
+                      <h2 className="text-3xl font-bold text-[#003B5C] leading-tight tracking-tight">
                         {slides[currentSlide].title}
                       </h2>
-                      <p className="text-base text-slate-500 leading-relaxed font-medium">
+                      <p className="text-base text-[#8E8E93] leading-relaxed font-medium">
                         {slides[currentSlide].description}
                       </p>
                     </div>
@@ -381,10 +381,10 @@ export default function HomePage() {
                         </div>
                       </div>
                       <div className="space-y-4">
-                        <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
+                        <h2 className="text-3xl font-bold text-[#003B5C] leading-tight tracking-tight">
                           {slides[currentSlide].title}
                         </h2>
-                        <p className="text-base text-slate-500 leading-relaxed font-medium">
+                        <p className="text-base text-[#8E8E93] leading-relaxed font-medium">
                           {slides[currentSlide].description}
                         </p>
                       </div>
@@ -403,10 +403,10 @@ export default function HomePage() {
                         </div>
                       </div>
                       <div className="space-y-4">
-                        <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
+                        <h2 className="text-3xl font-bold text-[#003B5C] leading-tight tracking-tight">
                           {slides[currentSlide].title}
                         </h2>
-                        <p className="text-base text-slate-500 leading-relaxed font-medium">
+                        <p className="text-base text-[#8E8E93] leading-relaxed font-medium">
                           {slides[currentSlide].description}
                         </p>
                       </div>
@@ -423,54 +423,54 @@ export default function HomePage() {
                       <div className="w-16 h-16 flex items-center justify-center mx-auto shrink-0">
                         <div className="text-4xl">🔬</div>
                       </div>
-                      <h2 className="text-2xl font-bold text-slate-900 leading-tight tracking-tight">
+                      <h2 className="text-2xl font-bold text-[#003B5C] leading-tight tracking-tight">
                         {slides[currentSlide].title}
                       </h2>
-                      <p className="text-sm text-slate-500 leading-relaxed font-medium">
+                      <p className="text-sm text-[#8E8E93] leading-relaxed font-medium">
                         {slides[currentSlide].description}
                       </p>
                     </div>
                     
                     {/* Grid de 8 etapas */}
                     <div className="grid grid-cols-2 gap-2.5 px-2">
-                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                      <div className="bg-[#E1F5FE]/30 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px] border border-white/20">
                         <div className="text-2xl">💧</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Ósmosis Inversa</h4>
+                        <h4 className="font-bold text-[#003B5C] text-xs text-center leading-tight">Ósmosis Inversa</h4>
                       </div>
                       
-                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                      <div className="bg-[#E1F5FE]/30 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px] border border-white/20">
                         <div className="text-2xl">💡</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Luces Ultravioleta</h4>
+                        <h4 className="font-bold text-[#003B5C] text-xs text-center leading-tight">Luces Ultravioleta</h4>
                       </div>
                       
-                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                      <div className="bg-[#E1F5FE]/30 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px] border border-white/20">
                         <div className="text-2xl">✨</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Sistema de Suavizadores</h4>
+                        <h4 className="font-bold text-[#003B5C] text-xs text-center leading-tight">Sistema de Suavizadores</h4>
                       </div>
                       
-                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                      <div className="bg-[#E1F5FE]/30 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px] border border-white/20">
                         <div className="text-2xl">🔋</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Tanque de Carbón Activado</h4>
+                        <h4 className="font-bold text-[#003B5C] text-xs text-center leading-tight">Tanque de Carbón Activado</h4>
                       </div>
                       
-                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                      <div className="bg-[#E1F5FE]/30 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px] border border-white/20">
                         <div className="text-2xl">🌊</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Sistema de Ozonización</h4>
+                        <h4 className="font-bold text-[#003B5C] text-xs text-center leading-tight">Sistema de Ozonización</h4>
                       </div>
                       
-                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                      <div className="bg-[#E1F5FE]/30 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px] border border-white/20">
                         <div className="text-2xl">🌫️</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Filtros de Carbón Activado</h4>
+                        <h4 className="font-bold text-[#003B5C] text-xs text-center leading-tight">Filtros de Carbón Activado</h4>
                       </div>
                       
-                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                      <div className="bg-[#E1F5FE]/30 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px] border border-white/20">
                         <div className="text-2xl">🧪</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Filtros de Sedimento</h4>
+                        <h4 className="font-bold text-[#003B5C] text-xs text-center leading-tight">Filtros de Sedimento</h4>
                       </div>
                       
-                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                      <div className="bg-[#E1F5FE]/30 backdrop-blur-sm rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px] border border-white/20">
                         <div className="text-2xl">🌬️</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Filtros de Aire</h4>
+                        <h4 className="font-bold text-[#003B5C] text-xs text-center leading-tight">Filtros de Aire</h4>
                       </div>
                     </div>
                   </div>
@@ -501,21 +501,21 @@ export default function HomePage() {
                           onClick={() => handleInputChange("clientType", type.value)}
                           className={`flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 ${
                             formData.clientType === type.value
-                              ? "bg-slate-900 shadow-[0_4px_12px_rgb(0,0,0,0.15)]"
-                              : "bg-slate-50 hover:bg-slate-100"
+                              ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] shadow-lg shadow-blue-500/30"
+                              : "bg-[#F5F5F7]/60 backdrop-blur-sm hover:bg-[#E1F5FE]/40 border border-white/20"
                           }`}
                         >
                           <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 ${
                             formData.clientType === type.value
-                              ? "bg-white/10"
-                              : "bg-white"
+                              ? "bg-white/20"
+                              : "bg-white/60"
                           }`}>
-                            <Building className={`w-6 h-6 ${formData.clientType === type.value ? "text-white" : "text-slate-700"}`} strokeWidth={1.5} />
+                            <Building className={`w-6 h-6 ${formData.clientType === type.value ? "text-white" : "text-[#007AFF]"}`} strokeWidth={1.5} />
                           </div>
                           <span className={`text-base font-semibold ${
                             formData.clientType === type.value
                               ? "text-white"
-                              : "text-slate-900"
+                              : "text-[#003B5C]"
                           }`}>
                             {type.label}
                           </span>
@@ -555,8 +555,8 @@ export default function HomePage() {
                           }}
                           className={`p-4 rounded-2xl transition-all duration-300 flex flex-col items-center justify-center space-y-2 min-h-[90px] ${
                             formData.zone === zone.value
-                              ? "bg-slate-900 text-white shadow-[0_4px_12px_rgb(0,0,0,0.15)]"
-                              : "bg-slate-50 hover:bg-slate-100 text-slate-900"
+                              ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white shadow-lg shadow-blue-500/30"
+                              : "bg-[#F5F5F7]/60 backdrop-blur-sm hover:bg-[#E1F5FE]/40 text-[#003B5C] border border-white/20"
                           }`}
                         >
                           <MapPin className="w-5 h-5 shrink-0" strokeWidth={1.5} />
@@ -604,14 +604,14 @@ export default function HomePage() {
                     
                     {/* Selector de Frecuencia */}
                     <div className="flex justify-center">
-                      <div className="inline-flex rounded-full bg-slate-100 p-1">
+                      <div className="inline-flex rounded-full bg-[#F5F5F7]/60 backdrop-blur-sm p-1 border border-white/20">
                         <button
                           type="button"
                           onClick={() => setFrequency("semana")}
                           className={`px-5 py-2 rounded-full transition-all duration-300 text-sm font-semibold ${
                             frequency === "semana"
-                              ? "bg-slate-900 text-white"
-                              : "text-slate-600 hover:text-slate-900"
+                              ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white shadow-md"
+                              : "text-[#8E8E93] hover:text-[#003B5C]"
                           }`}
                         >
                           Por Semana
@@ -621,8 +621,8 @@ export default function HomePage() {
                           onClick={() => setFrequency("dia")}
                           className={`px-5 py-2 rounded-full transition-all duration-300 text-sm font-semibold ${
                             frequency === "dia"
-                              ? "bg-slate-900 text-white"
-                              : "text-slate-600 hover:text-slate-900"
+                              ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white shadow-md"
+                              : "text-[#8E8E93] hover:text-[#003B5C]"
                           }`}
                         >
                           Por Día
@@ -643,10 +643,10 @@ export default function HomePage() {
                             handleInputChange("weeklyConsumption", value);
                           }
                         }}
-                        className="w-full max-w-[160px] p-3 text-xl font-bold text-center border border-slate-200 rounded-2xl bg-slate-50 focus:outline-none focus:border-slate-900 focus:bg-white transition-all placeholder:text-slate-400"
+                        className="w-full max-w-[160px] p-3 text-xl font-bold text-center border-2 border-white/30 rounded-2xl bg-[#F5F5F7]/60 backdrop-blur-sm focus:outline-none focus:border-[#007AFF] focus:bg-white/80 transition-all placeholder:text-[#8E8E93] text-[#003B5C]"
                         placeholder={frequency === "dia" ? "10" : getMinimumConsumption().toString()}
                       />
-                      <p className="text-xs text-slate-500 font-medium">
+                      <p className="text-xs text-[#8E8E93] font-medium">
                         Garrafones por {frequency === "dia" ? "día" : "semana"} (mínimo {frequency === "dia" ? 10 : getMinimumConsumption()})
                       </p>
                       
@@ -680,8 +680,8 @@ export default function HomePage() {
                                 onClick={() => handleInputChange("weeklyConsumption", min)}
                                 className={`px-3 py-1.5 rounded-full transition-all duration-300 text-xs font-semibold ${
                                   isSelected
-                                    ? "bg-slate-900 text-white shadow-[0_4px_12px_rgb(0,0,0,0.15)]"
-                                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                    ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white shadow-lg shadow-blue-500/30"
+                                    : "bg-[#F5F5F7]/60 backdrop-blur-sm text-[#8E8E93] hover:bg-[#E1F5FE]/40 border border-white/20"
                                 }`}
                               >
                                 {range}
@@ -718,27 +718,27 @@ export default function HomePage() {
                   
                   <div className="space-y-4">
                     <div className="space-y-3">
-                      <label className="text-sm font-semibold text-slate-700">
+                      <label className="text-sm font-semibold text-[#003B5C]">
                         Nombre completo
                       </label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={(e) => handleInputChange("name", e.target.value)}
-                        className="w-full p-3 text-sm border border-slate-200 rounded-2xl bg-slate-50 focus:outline-none focus:border-slate-900 focus:bg-white transition-all placeholder:text-slate-400"
+                        className="w-full p-3 text-sm border-2 border-white/30 rounded-2xl bg-[#F5F5F7]/60 backdrop-blur-sm focus:outline-none focus:border-[#007AFF] focus:bg-white/80 transition-all placeholder:text-[#8E8E93] text-[#003B5C]"
                         placeholder="Tu nombre"
                       />
                     </div>
                     
                     <div className="space-y-3">
-                      <label className="text-sm font-semibold text-slate-700">
+                      <label className="text-sm font-semibold text-[#003B5C]">
                         Número de teléfono
                       </label>
                       <input
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => handleInputChange("phone", e.target.value)}
-                        className="w-full p-3 text-sm border border-slate-200 rounded-2xl bg-slate-50 focus:outline-none focus:border-slate-900 focus:bg-white transition-all placeholder:text-slate-400"
+                        className="w-full p-3 text-sm border-2 border-white/30 rounded-2xl bg-[#F5F5F7]/60 backdrop-blur-sm focus:outline-none focus:border-[#007AFF] focus:bg-white/80 transition-all placeholder:text-[#8E8E93] text-[#003B5C]"
                         placeholder="664 123 4567"
                       />
                     </div>
@@ -759,30 +759,30 @@ export default function HomePage() {
                   </div>
                   
                   <div className="space-y-4">
-                    <div className="bg-slate-50 rounded-2xl p-4 space-y-3 overflow-y-auto max-h-[280px]">
-                      <h3 className="text-base font-bold text-slate-900">
+                    <div className="bg-[#E1F5FE]/30 backdrop-blur-sm rounded-2xl p-4 space-y-3 overflow-y-auto max-h-[280px] border border-white/20">
+                      <h3 className="text-base font-bold text-[#003B5C]">
                         Resumen de tu cotización
                       </h3>
                       
                       <div className="space-y-2.5">
                         {formData.name && (
                           <div className="flex justify-between items-center gap-2">
-                            <span className="text-slate-500 text-xs font-medium">Nombre:</span>
-                            <span className="font-semibold text-slate-900 text-sm text-right">{formData.name}</span>
+                            <span className="text-[#8E8E93] text-xs font-medium">Nombre:</span>
+                            <span className="font-semibold text-[#003B5C] text-sm text-right">{formData.name}</span>
                           </div>
                         )}
                         
                         {formData.phone && (
                           <div className="flex justify-between items-center gap-2">
-                            <span className="text-slate-500 text-xs font-medium">Teléfono:</span>
-                            <span className="font-semibold text-slate-900 text-sm text-right">{formData.phone}</span>
+                            <span className="text-[#8E8E93] text-xs font-medium">Teléfono:</span>
+                            <span className="font-semibold text-[#003B5C] text-sm text-right">{formData.phone}</span>
                           </div>
                         )}
                         
                         {formData.clientType && (
                           <div className="flex justify-between items-center gap-2">
-                            <span className="text-slate-500 text-xs font-medium">Tipo de cliente:</span>
-                            <span className="font-semibold text-slate-900 text-sm text-right">
+                            <span className="text-[#8E8E93] text-xs font-medium">Tipo de cliente:</span>
+                            <span className="font-semibold text-[#003B5C] text-sm text-right">
                               {clientTypes.find(t => t.value === formData.clientType)?.label}
                             </span>
                           </div>
@@ -790,15 +790,15 @@ export default function HomePage() {
                         
                         {formData.weeklyConsumption && (
                           <div className="flex justify-between items-center gap-2">
-                            <span className="text-slate-500 text-xs font-medium">Consumo:</span>
-                            <span className="font-semibold text-slate-900 text-sm text-right">{formData.weeklyConsumption} garrafones/{frequency === "dia" ? "día" : "semana"}</span>
+                            <span className="text-[#8E8E93] text-xs font-medium">Consumo:</span>
+                            <span className="font-semibold text-[#003B5C] text-sm text-right">{formData.weeklyConsumption} garrafones/{frequency === "dia" ? "día" : "semana"}</span>
                           </div>
                         )}
                         
                         {formData.zone && (
                           <div className="flex justify-between items-center gap-2">
-                            <span className="text-slate-500 text-xs font-medium">Zona:</span>
-                            <span className="font-semibold text-slate-900 text-sm text-right">
+                            <span className="text-[#8E8E93] text-xs font-medium">Zona:</span>
+                            <span className="font-semibold text-[#003B5C] text-sm text-right">
                               {zones.find(z => z.value === formData.zone)?.label}
                             </span>
                           </div>
@@ -810,7 +810,7 @@ export default function HomePage() {
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-3.5 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all shadow-[0_4px_12px_rgb(0,0,0,0.15)] text-sm flex items-center justify-center gap-2"
+                      className="w-full py-3.5 bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white font-bold rounded-2xl hover:from-[#0051D5] hover:to-[#00A3FF] transition-all shadow-lg shadow-blue-500/30 text-sm flex items-center justify-center gap-2"
                     >
                       <MessageCircle className="w-5 h-5" strokeWidth={2} />
                       Enviar por WhatsApp
@@ -824,12 +824,12 @@ export default function HomePage() {
         </div>
 
         {/* Botones de navegación - Siempre en la misma posición */}
-        <div className="shrink-0 py-4 px-6 border-t border-slate-100">
+        <div className="shrink-0 py-4 px-6 border-t border-white/20 backdrop-blur-sm">
           <div className="flex items-center justify-between gap-4">
             <button
               onClick={handlePrevious}
               disabled={currentSlide === 0}
-              className="w-12 h-12 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0"
+              className="w-12 h-12 rounded-full bg-[#F5F5F7]/60 backdrop-blur-sm text-[#007AFF] hover:bg-[#E1F5FE]/60 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 border border-white/20"
             >
               <ArrowLeft className="w-5 h-5" strokeWidth={2.5} />
             </button>
@@ -837,10 +837,10 @@ export default function HomePage() {
             <button
               onClick={handleNext}
               disabled={currentSlide === slides.length - 1 || !isNextButtonEnabled()}
-              className={`flex-1 max-w-[280px] py-3.5 rounded-full transition-all flex items-center justify-center gap-2 font-semibold text-base shadow-[0_4px_12px_rgb(0,0,0,0.15)] disabled:opacity-30 disabled:cursor-not-allowed ${
+              className={`flex-1 max-w-[280px] py-3.5 rounded-full transition-all flex items-center justify-center gap-2 font-semibold text-base shadow-lg disabled:opacity-30 disabled:cursor-not-allowed ${
                 isNextButtonEnabled() && currentSlide < slides.length - 1
-                  ? "bg-slate-900 text-white hover:bg-slate-800"
-                  : "bg-slate-200 text-slate-400"
+                  ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white hover:from-[#0051D5] hover:to-[#00A3FF] shadow-blue-500/30"
+                  : "bg-[#F5F5F7]/60 backdrop-blur-sm text-[#8E8E93] border border-white/20"
               }`}
             >
               <span>Continuar</span>
