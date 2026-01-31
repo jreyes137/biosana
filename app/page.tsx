@@ -73,7 +73,7 @@ export default function HomePage() {
       id: 3,
       type: "benefit",
       title: "Tecnología de Filtrado",
-      description: "4 etapas de purificación avanzada"
+      description: "8 etapas de purificación avanzada"
     },
     {
       id: 4,
@@ -288,7 +288,7 @@ export default function HomePage() {
   return (
     <div className="min-h-dvh w-full flex items-center justify-center bg-slate-50 font-sans overflow-hidden py-4">
       {/* Contenedor principal con dimensiones fijas */}
-      <div className="w-full max-w-[400px] min-h-[680px] h-[680px] flex flex-col justify-between bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden mx-4">
+      <div className="w-full max-w-[420px] min-h-[650px] h-[650px] flex flex-col justify-between bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden mx-4">
         {/* Header fijo - Siempre arriba */}
         <div className="shrink-0">
           {/* Barra de progreso estilo Instagram Stories */}
@@ -344,79 +344,85 @@ export default function HomePage() {
             >
               {/* Hero Slide */}
               {slides[currentSlide].type === "hero" && (
-                <div className="min-h-full flex flex-col items-center justify-center text-center space-y-10 py-8">
-                  <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
-                    <div className="text-7xl animate-[float_4s_ease-in-out_infinite]">
-                      💧
+                <div className="min-h-full flex flex-col py-4">
+                  <div className="flex-1 flex flex-col items-center justify-center text-center space-y-10">
+                    <div className="relative w-24 h-24 flex items-center justify-center shrink-0">
+                      <div className="text-7xl animate-[float_4s_ease-in-out_infinite]">
+                        💧
+                      </div>
+                      <style jsx>{`
+                        @keyframes float {
+                          0%, 100% { transform: translateY(0px); }
+                          50% { transform: translateY(-15px); }
+                        }
+                      `}</style>
                     </div>
-                    <style jsx>{`
-                      @keyframes float {
-                        0%, 100% { transform: translateY(0px); }
-                        50% { transform: translateY(-15px); }
-                      }
-                    `}</style>
-                  </div>
 
-                  <div className="space-y-4">
-                    <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
-                      {slides[currentSlide].title}
-                    </h2>
-                    <p className="text-base text-slate-500 leading-relaxed font-medium">
-                      {slides[currentSlide].description}
-                    </p>
+                    <div className="space-y-4">
+                      <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
+                        {slides[currentSlide].title}
+                      </h2>
+                      <p className="text-base text-slate-500 leading-relaxed font-medium">
+                        {slides[currentSlide].description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               )}
 
               {/* Benefit Slides */}
               {slides[currentSlide].type === "benefit" && slides[currentSlide].id === 2 && (
-                <div className="min-h-full flex flex-col justify-center py-8">
-                  <div className="text-center space-y-10">
-                    <div className="flex justify-center">
-                      <div className="w-24 h-24 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
-                        {slides[currentSlide].icon}
+                <div className="min-h-full flex flex-col py-4">
+                  <div className="flex-1 flex flex-col justify-center space-y-10">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-8">
+                        <div className="w-24 h-24 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
+                          {slides[currentSlide].icon}
+                        </div>
                       </div>
-                    </div>
-                    <div className="space-y-4">
-                      <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
-                        {slides[currentSlide].title}
-                      </h2>
-                      <p className="text-base text-slate-500 leading-relaxed font-medium">
-                        {slides[currentSlide].description}
-                      </p>
+                      <div className="space-y-4">
+                        <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
+                          {slides[currentSlide].title}
+                        </h2>
+                        <p className="text-base text-slate-500 leading-relaxed font-medium">
+                          {slides[currentSlide].description}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
 
               {slides[currentSlide].type === "benefit" && slides[currentSlide].id === 4 && (
-                <div className="min-h-full flex flex-col justify-center py-8">
-                  <div className="text-center space-y-10">
-                    <div className="flex justify-center">
-                      <div className="w-24 h-24 rounded-full bg-amber-50 flex items-center justify-center shrink-0">
-                        {slides[currentSlide].icon}
+                <div className="min-h-full flex flex-col py-4">
+                  <div className="flex-1 flex flex-col justify-center space-y-10">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-8">
+                        <div className="w-24 h-24 rounded-full bg-amber-50 flex items-center justify-center shrink-0">
+                          {slides[currentSlide].icon}
+                        </div>
                       </div>
-                    </div>
-                    <div className="space-y-4">
-                      <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
-                        {slides[currentSlide].title}
-                      </h2>
-                      <p className="text-base text-slate-500 leading-relaxed font-medium">
-                        {slides[currentSlide].description}
-                      </p>
+                      <div className="space-y-4">
+                        <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
+                          {slides[currentSlide].title}
+                        </h2>
+                        <p className="text-base text-slate-500 leading-relaxed font-medium">
+                          {slides[currentSlide].description}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Technology Slide */}
+              {/* Technology Slide - 8 Etapas de Filtrado */}
               {slides[currentSlide].type === "benefit" && slides[currentSlide].id === 3 && (
-                <div className="min-h-full flex flex-col justify-center py-8">
-                  <div className="text-center space-y-8">
-                    <div className="w-24 h-24 flex items-center justify-center mx-auto shrink-0">
-                      <div className="text-6xl">🔬</div>
-                    </div>
-                    <div className="space-y-4">
+                <div className="min-h-full flex flex-col justify-center py-4">
+                  <div className="flex-1 flex flex-col justify-center space-y-6">
+                    <div className="text-center space-y-3">
+                      <div className="w-16 h-16 flex items-center justify-center mx-auto shrink-0">
+                        <div className="text-4xl">🔬</div>
+                      </div>
                       <h2 className="text-2xl font-bold text-slate-900 leading-tight tracking-tight">
                         {slides[currentSlide].title}
                       </h2>
@@ -425,29 +431,46 @@ export default function HomePage() {
                       </p>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="bg-slate-50 rounded-2xl p-4 flex flex-col items-center justify-center space-y-2 min-h-[110px]">
-                        <div className="text-2xl">🔬</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center">Microfiltración</h4>
-                        <p className="text-[10px] text-slate-500 text-center">Sedimentos</p>
+                    {/* Grid de 8 etapas */}
+                    <div className="grid grid-cols-2 gap-2.5 px-2">
+                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                        <div className="text-2xl">💧</div>
+                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Ósmosis Inversa</h4>
                       </div>
                       
-                      <div className="bg-slate-50 rounded-2xl p-4 flex flex-col items-center justify-center space-y-2 min-h-[110px]">
-                        <div className="text-2xl">🌫️</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center">Carbón activado</h4>
-                        <p className="text-[10px] text-slate-500 text-center">Granular</p>
-                      </div>
-                      
-                      <div className="bg-slate-50 rounded-2xl p-4 flex flex-col items-center justify-center space-y-2 min-h-[110px]">
+                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
                         <div className="text-2xl">💡</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center">Luz UV</h4>
-                        <p className="text-[10px] text-slate-500 text-center">Esterilización</p>
+                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Luces Ultravioleta</h4>
                       </div>
                       
-                      <div className="bg-slate-50 rounded-2xl p-4 flex flex-col items-center justify-center space-y-2 min-h-[110px]">
+                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                        <div className="text-2xl">✨</div>
+                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Sistema de Suavizadores</h4>
+                      </div>
+                      
+                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                        <div className="text-2xl">🔋</div>
+                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Tanque de Carbón Activado</h4>
+                      </div>
+                      
+                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
                         <div className="text-2xl">🌊</div>
-                        <h4 className="font-bold text-slate-900 text-xs text-center">Ozonización</h4>
-                        <p className="text-[10px] text-slate-500 text-center">Pulido final</p>
+                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Sistema de Ozonización</h4>
+                      </div>
+                      
+                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                        <div className="text-2xl">🌫️</div>
+                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Filtros de Carbón Activado</h4>
+                      </div>
+                      
+                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                        <div className="text-2xl">🧪</div>
+                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Filtros de Sedimento</h4>
+                      </div>
+                      
+                      <div className="bg-blue-50/50 rounded-xl p-3 flex flex-col items-center justify-center space-y-2 min-h-[85px]">
+                        <div className="text-2xl">🌬️</div>
+                        <h4 className="font-bold text-slate-900 text-xs text-center leading-tight">Filtros de Aire</h4>
                       </div>
                     </div>
                   </div>
