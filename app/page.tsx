@@ -286,18 +286,18 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-dvh w-full flex items-center justify-center bg-linear-to-b from-slate-50 via-white to-slate-100 font-sans overflow-hidden">
-      {/* Contenedor principal - Tarjeta de cristal premium */}
-      <div className="w-full max-w-[400px] h-full sm:h-[90vh] flex flex-col bg-white/80 backdrop-blur-md rounded-[40px] shadow-2xl shadow-blue-500/5 overflow-hidden mx-4">
+    <div className="min-h-dvh w-full flex items-center justify-center bg-slate-50 font-sans overflow-hidden">
+      {/* Contenedor principal - Tarjeta premium con sombra suave */}
+      <div className="w-full max-w-[420px] h-full sm:h-[92vh] flex flex-col bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden mx-4">
         {/* Barra de progreso estilo Instagram Stories */}
-        <div className="flex gap-1 px-8 pt-6 pb-4">
+        <div className="flex gap-1.5 px-6 pt-5 pb-3">
           {slides.map((slide, index) => (
             <div
               key={slide.id}
-              className="flex-1 h-1 bg-slate-200 rounded-full overflow-hidden"
+              className="flex-1 h-0.5 bg-slate-200 rounded-full overflow-hidden"
             >
               <div
-                className={`h-full bg-linear-to-r from-blue-500 to-blue-600 transition-all duration-300 ${
+                className={`h-full bg-slate-900 transition-all duration-500 ${
                   index < currentSlide ? 'w-full' : index === currentSlide ? 'w-1/2' : 'w-0'
                 }`}
               />
@@ -306,20 +306,20 @@ export default function HomePage() {
         </div>
 
         {/* Header minimalista y elegante */}
-        <div className="px-8 pb-4">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-linear-to-br from-blue-100 to-blue-50 flex items-center justify-center">
-              <Droplets className="w-4 h-4 text-blue-500" strokeWidth={2} />
+        <div className="px-6 pb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center">
+              <Droplets className="w-5 h-5 text-white" strokeWidth={2} />
             </div>
             <div className="text-left">
-              <h1 className="text-sm font-black text-slate-900">BIOSANA</h1>
-              <p className="text-[10px] text-slate-400">Agua premium</p>
+              <h1 className="text-base font-bold text-slate-900 tracking-tight">BIOSANA</h1>
+              <p className="text-[11px] text-slate-500 font-medium">Agua purificada premium</p>
             </div>
           </div>
         </div>
 
         {/* Contenido central */}
-        <div className="flex-1 overflow-y-auto px-8">
+        <div className="flex-1 overflow-y-auto px-6">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentSlide}
@@ -337,13 +337,13 @@ export default function HomePage() {
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.1}
               onDragEnd={handleDragEnd}
-              className="py-8"
+              className="py-6"
             >
               {/* Hero Slide */}
               {slides[currentSlide].type === "hero" && (
-                <div className="h-full flex flex-col items-center justify-center text-center space-y-12">
+                <div className="h-full flex flex-col items-center justify-center text-center space-y-14">
                   <div className="relative">
-                    <div className="text-7xl animate-[float_4s_ease-in-out_infinite]">
+                    <div className="text-8xl animate-[float_4s_ease-in-out_infinite]">
                       💧
                     </div>
                     <style jsx>{`
@@ -354,11 +354,11 @@ export default function HomePage() {
                     `}</style>
                   </div>
 
-                  <div className="space-y-6">
-                    <h2 className="text-3xl font-black text-slate-900 leading-tight">
+                  <div className="space-y-4">
+                    <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-base text-slate-400 leading-relaxed">
+                    <p className="text-base text-slate-500 leading-relaxed font-medium">
                       {slides[currentSlide].description}
                     </p>
                   </div>
@@ -368,17 +368,17 @@ export default function HomePage() {
               {/* Benefit Slides */}
               {slides[currentSlide].type === "benefit" && slides[currentSlide].id === 2 && (
                 <div className="flex-1 flex flex-col justify-center">
-                  <div className="text-center space-y-10">
+                  <div className="text-center space-y-12">
                     <div className="flex justify-center">
-                      <div className="w-20 h-20 rounded-full bg-linear-to-br from-emerald-50 to-emerald-100/50 flex items-center justify-center">
+                      <div className="w-24 h-24 rounded-full bg-emerald-50 flex items-center justify-center">
                         {slides[currentSlide].icon}
                       </div>
                     </div>
-                    <div className="space-y-6">
-                      <h2 className="text-2xl font-black text-slate-900 leading-tight">
+                    <div className="space-y-4">
+                      <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
                         {slides[currentSlide].title}
                       </h2>
-                      <p className="text-base text-slate-400 leading-relaxed">
+                      <p className="text-base text-slate-500 leading-relaxed font-medium">
                         {slides[currentSlide].description}
                       </p>
                     </div>
@@ -388,17 +388,17 @@ export default function HomePage() {
 
               {slides[currentSlide].type === "benefit" && slides[currentSlide].id === 4 && (
                 <div className="flex-1 flex flex-col justify-center">
-                  <div className="text-center space-y-10">
+                  <div className="text-center space-y-12">
                     <div className="flex justify-center">
-                      <div className="w-20 h-20 rounded-full bg-linear-to-br from-amber-50 to-amber-100/50 flex items-center justify-center">
+                      <div className="w-24 h-24 rounded-full bg-amber-50 flex items-center justify-center">
                         {slides[currentSlide].icon}
                       </div>
                     </div>
-                    <div className="space-y-6">
-                      <h2 className="text-2xl font-black text-slate-900 leading-tight">
+                    <div className="space-y-4">
+                      <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
                         {slides[currentSlide].title}
                       </h2>
-                      <p className="text-base text-slate-400 leading-relaxed">
+                      <p className="text-base text-slate-500 leading-relaxed font-medium">
                         {slides[currentSlide].description}
                       </p>
                     </div>
@@ -410,39 +410,39 @@ export default function HomePage() {
               {slides[currentSlide].type === "benefit" && slides[currentSlide].id === 3 && (
                 <div className="flex-1 flex flex-col justify-center">
                   <div className="text-center space-y-10">
-                    <div className="text-5xl">🔬</div>
-                    <div className="space-y-6">
-                      <h2 className="text-2xl font-black text-slate-900 leading-tight">
+                    <div className="text-6xl">🔬</div>
+                    <div className="space-y-4">
+                      <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight">
                         {slides[currentSlide].title}
                       </h2>
-                      <p className="text-base text-slate-400 leading-relaxed">
+                      <p className="text-base text-slate-500 leading-relaxed font-medium">
                         {slides[currentSlide].description}
                       </p>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-4 mt-8">
-                      <div className="bg-linear-to-br from-blue-50 to-white rounded-3xl p-5 flex flex-col items-center justify-center space-y-3">
+                    <div className="grid grid-cols-2 gap-3 mt-10">
+                      <div className="bg-slate-50 rounded-2xl p-5 flex flex-col items-center justify-center space-y-3">
                         <div className="text-3xl">🔬</div>
                         <h4 className="font-bold text-slate-900 text-sm text-center">Microfiltración</h4>
-                        <p className="text-xs text-slate-400 text-center">Sedimentos</p>
+                        <p className="text-xs text-slate-500 text-center">Sedimentos</p>
                       </div>
                       
-                      <div className="bg-linear-to-br from-blue-50 to-white rounded-3xl p-5 flex flex-col items-center justify-center space-y-3">
+                      <div className="bg-slate-50 rounded-2xl p-5 flex flex-col items-center justify-center space-y-3">
                         <div className="text-3xl">🌫️</div>
                         <h4 className="font-bold text-slate-900 text-sm text-center">Carbón activado</h4>
-                        <p className="text-xs text-slate-400 text-center">Granular</p>
+                        <p className="text-xs text-slate-500 text-center">Granular</p>
                       </div>
                       
-                      <div className="bg-linear-to-br from-blue-50 to-white rounded-3xl p-5 flex flex-col items-center justify-center space-y-3">
+                      <div className="bg-slate-50 rounded-2xl p-5 flex flex-col items-center justify-center space-y-3">
                         <div className="text-3xl">💡</div>
                         <h4 className="font-bold text-slate-900 text-sm text-center">Luz UV</h4>
-                        <p className="text-xs text-slate-400 text-center">Esterilización</p>
+                        <p className="text-xs text-slate-500 text-center">Esterilización</p>
                       </div>
                       
-                      <div className="bg-linear-to-br from-blue-50 to-white rounded-3xl p-5 flex flex-col items-center justify-center space-y-3">
+                      <div className="bg-slate-50 rounded-2xl p-5 flex flex-col items-center justify-center space-y-3">
                         <div className="text-3xl">🌊</div>
                         <h4 className="font-bold text-slate-900 text-sm text-center">Ozonización</h4>
-                        <p className="text-xs text-slate-400 text-center">Pulido final</p>
+                        <p className="text-xs text-slate-500 text-center">Pulido final</p>
                       </div>
                     </div>
                   </div>
@@ -451,40 +451,40 @@ export default function HomePage() {
 
               {/* Form Slides */}
               {slides[currentSlide].type === "form" && slides[currentSlide].id === 5 && (
-                <div className="h-full flex flex-col space-y-10">
-                  <div className="text-center space-y-4">
-                    <h2 className="text-2xl font-black text-slate-900">
+                <div className="h-full flex flex-col space-y-8">
+                  <div className="text-center space-y-3">
+                    <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-slate-500 font-medium">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
-                  <div className="space-y-6">
-                    <h3 className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
+                  <div className="space-y-5">
+                    <h3 className="text-xs font-semibold text-slate-500 tracking-wide uppercase">
                       Tipo de cliente
                     </h3>
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-3">
                       {clientTypes.map((type) => (
                         <button
                           key={type.value}
                           type="button"
                           onClick={() => handleInputChange("clientType", type.value)}
-                          className={`flex items-center gap-4 p-5 rounded-3xl transition-all duration-300 ${
+                          className={`flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 ${
                             formData.clientType === type.value
-                              ? "bg-linear-to-r from-blue-500 to-blue-600 shadow-lg shadow-blue-500/20"
-                              : "bg-blue-50 hover:bg-blue-100"
+                              ? "bg-slate-900 shadow-[0_4px_12px_rgb(0,0,0,0.15)]"
+                              : "bg-slate-50 hover:bg-slate-100"
                           }`}
                         >
                           <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                             formData.clientType === type.value
-                              ? "bg-white/20"
+                              ? "bg-white/10"
                               : "bg-white"
                           }`}>
-                            {type.icon}
+                            <Building className={`w-6 h-6 ${formData.clientType === type.value ? "text-white" : "text-slate-700"}`} strokeWidth={1.5} />
                           </div>
-                          <span className={`text-base font-bold ${
+                          <span className={`text-base font-semibold ${
                             formData.clientType === type.value
                               ? "text-white"
                               : "text-slate-900"
@@ -499,21 +499,21 @@ export default function HomePage() {
               )}
 
               {slides[currentSlide].type === "form" && slides[currentSlide].id === 6 && (
-                <div className="h-full flex flex-col space-y-10">
-                  <div className="text-center space-y-4">
-                    <h2 className="text-2xl font-black text-slate-900">
+                <div className="h-full flex flex-col space-y-8">
+                  <div className="text-center space-y-3">
+                    <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-slate-500 font-medium">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
-                  <div className="space-y-6">
-                    <h3 className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
+                  <div className="space-y-5">
+                    <h3 className="text-xs font-semibold text-slate-500 tracking-wide uppercase">
                       Zona en Tijuana
                     </h3>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2.5">
                       {zones.map((zone) => (
                         <button
                           key={zone.value}
@@ -524,14 +524,14 @@ export default function HomePage() {
                               setCustomZone("");
                             }
                           }}
-                          className={`p-5 rounded-3xl transition-all duration-300 flex flex-col items-center justify-center space-y-2 ${
+                          className={`p-4 rounded-2xl transition-all duration-300 flex flex-col items-center justify-center space-y-2 ${
                             formData.zone === zone.value
-                              ? "bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/20"
-                              : "bg-blue-50 hover:bg-blue-100 text-slate-900"
+                              ? "bg-slate-900 text-white shadow-[0_4px_12px_rgb(0,0,0,0.15)]"
+                              : "bg-slate-50 hover:bg-slate-100 text-slate-900"
                           }`}
                         >
-                          {zone.icon}
-                          <span className="text-sm font-bold">
+                          <MapPin className="w-5 h-5" strokeWidth={1.5} />
+                          <span className="text-sm font-semibold">
                             {zone.label}
                           </span>
                         </button>
@@ -539,15 +539,15 @@ export default function HomePage() {
                     </div>
                     
                     {formData.zone === "otros" && (
-                      <div className="mt-8 space-y-4">
-                        <label className="text-sm font-bold text-slate-700">
+                      <div className="mt-6 space-y-3">
+                        <label className="text-sm font-semibold text-slate-700">
                           Escribe tu colonia o zona específica
                         </label>
                         <input
                           type="text"
                           value={customZone}
                           onChange={(e) => setCustomZone(e.target.value)}
-                          className="w-full p-5 text-base border-2 border-blue-100 rounded-3xl bg-blue-50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-slate-400"
+                          className="w-full p-4 text-base border border-slate-200 rounded-2xl bg-slate-50 focus:outline-none focus:border-slate-900 focus:bg-white transition-all placeholder:text-slate-400"
                           placeholder="Ej: Colonia Libertad, Zona Río, etc."
                         />
                       </div>
@@ -557,31 +557,31 @@ export default function HomePage() {
               )}
 
               {slides[currentSlide].type === "form" && slides[currentSlide].id === 7 && (
-                <div className="h-full flex flex-col space-y-10">
-                  <div className="text-center space-y-4">
-                    <h2 className="text-2xl font-black text-slate-900">
+                <div className="h-full flex flex-col space-y-8">
+                  <div className="text-center space-y-3">
+                    <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-slate-500 font-medium">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
-                  <div className="space-y-6">
-                    <h3 className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
+                  <div className="space-y-5">
+                    <h3 className="text-xs font-semibold text-slate-500 tracking-wide uppercase">
                       Volumen corporativo
                     </h3>
                     
                     {/* Selector de Frecuencia */}
                     <div className="flex justify-center">
-                      <div className="inline-flex rounded-full bg-blue-50 p-1">
+                      <div className="inline-flex rounded-full bg-slate-100 p-1">
                         <button
                           type="button"
                           onClick={() => setFrequency("semana")}
-                          className={`px-6 py-2.5 rounded-full transition-all duration-300 text-sm font-bold ${
+                          className={`px-6 py-2 rounded-full transition-all duration-300 text-sm font-semibold ${
                             frequency === "semana"
-                              ? "bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-md"
-                              : "text-slate-700 hover:text-slate-900"
+                              ? "bg-slate-900 text-white"
+                              : "text-slate-600 hover:text-slate-900"
                           }`}
                         >
                           Por Semana
@@ -589,10 +589,10 @@ export default function HomePage() {
                         <button
                           type="button"
                           onClick={() => setFrequency("dia")}
-                          className={`px-6 py-2.5 rounded-full transition-all duration-300 text-sm font-bold ${
+                          className={`px-6 py-2 rounded-full transition-all duration-300 text-sm font-semibold ${
                             frequency === "dia"
-                              ? "bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-md"
-                              : "text-slate-700 hover:text-slate-900"
+                              ? "bg-slate-900 text-white"
+                              : "text-slate-600 hover:text-slate-900"
                           }`}
                         >
                           Por Día
@@ -600,7 +600,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     
-                    <div className="flex flex-col items-center space-y-6">
+                    <div className="flex flex-col items-center space-y-5">
                       <input
                         type="number"
                         min={frequency === "dia" ? 10 : getMinimumConsumption()}
@@ -613,15 +613,15 @@ export default function HomePage() {
                             handleInputChange("weeklyConsumption", value);
                           }
                         }}
-                        className="w-full max-w-[200px] p-5 text-2xl font-black text-center border-2 border-blue-100 rounded-3xl bg-blue-50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-slate-400"
+                        className="w-full max-w-[180px] p-4 text-2xl font-bold text-center border border-slate-200 rounded-2xl bg-slate-50 focus:outline-none focus:border-slate-900 focus:bg-white transition-all placeholder:text-slate-400"
                         placeholder={frequency === "dia" ? "10" : getMinimumConsumption().toString()}
                       />
-                      <p className="text-sm text-slate-400">
+                      <p className="text-sm text-slate-500 font-medium">
                         Garrafones por {frequency === "dia" ? "día" : "semana"} (mínimo {frequency === "dia" ? 10 : getMinimumConsumption()})
                       </p>
                       
                       {/* Opciones de cantidad rápidas */}
-                      <div className="flex flex-wrap gap-2 justify-center mt-6">
+                      <div className="flex flex-wrap gap-2 justify-center mt-4">
                         {(() => {
                           const minimum = frequency === "dia" ? 10 : getMinimumConsumption();
                           let ranges;
@@ -648,13 +648,13 @@ export default function HomePage() {
                                 key={range}
                                 type="button"
                                 onClick={() => handleInputChange("weeklyConsumption", min)}
-                                className={`px-5 py-2.5 rounded-full transition-all duration-300 text-sm font-bold ${
+                                className={`px-4 py-2 rounded-full transition-all duration-300 text-sm font-semibold ${
                                   isSelected
-                                    ? "bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/20"
-                                    : "bg-blue-50 text-slate-700 hover:bg-blue-100"
+                                    ? "bg-slate-900 text-white shadow-[0_4px_12px_rgb(0,0,0,0.15)]"
+                                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                                 }`}
                               >
-                                <span className="font-bold">{range}</span>
+                                {range}
                               </button>
                             );
                           });
@@ -662,8 +662,8 @@ export default function HomePage() {
                       </div>
                       
                       {/* Aviso de pedido mínimo dinámico */}
-                      <div className="mt-8 text-center">
-                        <p className="text-xs text-slate-400 italic">
+                      <div className="mt-6 text-center">
+                        <p className="text-xs text-slate-500 italic">
                           {frequency === "dia" 
                             ? "Suministro mínimo diario: 10 garrafones (recurrencia justifica el viaje)" 
                             : getZoneWarningMessage()}
@@ -675,39 +675,39 @@ export default function HomePage() {
               )}
 
               {slides[currentSlide].type === "contact" && (
-                <div className="h-full flex flex-col space-y-10">
-                  <div className="text-center space-y-4">
-                    <h2 className="text-2xl font-black text-slate-900">
+                <div className="h-full flex flex-col space-y-8">
+                  <div className="text-center space-y-3">
+                    <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-slate-500 font-medium">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
-                  <div className="space-y-6">
-                    <div className="space-y-4">
-                      <label className="text-sm font-bold text-slate-700">
+                  <div className="space-y-4">
+                    <div className="space-y-3">
+                      <label className="text-sm font-semibold text-slate-700">
                         Nombre completo
                       </label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={(e) => handleInputChange("name", e.target.value)}
-                        className="w-full p-5 text-base border-2 border-blue-100 rounded-3xl bg-blue-50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-slate-400"
+                        className="w-full p-4 text-base border border-slate-200 rounded-2xl bg-slate-50 focus:outline-none focus:border-slate-900 focus:bg-white transition-all placeholder:text-slate-400"
                         placeholder="Tu nombre"
                       />
                     </div>
                     
-                    <div className="space-y-4">
-                      <label className="text-sm font-bold text-slate-700">
+                    <div className="space-y-3">
+                      <label className="text-sm font-semibold text-slate-700">
                         Número de teléfono
                       </label>
                       <input
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => handleInputChange("phone", e.target.value)}
-                        className="w-full p-5 text-base border-2 border-blue-100 rounded-3xl bg-blue-50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 placeholder:text-slate-400"
+                        className="w-full p-4 text-base border border-slate-200 rounded-2xl bg-slate-50 focus:outline-none focus:border-slate-900 focus:bg-white transition-all placeholder:text-slate-400"
                         placeholder="664 123 4567"
                       />
                     </div>
@@ -716,41 +716,41 @@ export default function HomePage() {
               )}
 
               {slides[currentSlide].type === "summary" && (
-                <div className="h-full flex flex-col space-y-10">
-                  <div className="text-center space-y-4">
-                    <h2 className="text-2xl font-black text-slate-900">
+                <div className="h-full flex flex-col space-y-8">
+                  <div className="text-center space-y-3">
+                    <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
                       {slides[currentSlide].title}
                     </h2>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-slate-500 font-medium">
                       {slides[currentSlide].description}
                     </p>
                   </div>
                   
-                  <div className="space-y-6">
-                    <div className="bg-linear-to-br from-blue-50 to-white rounded-3xl p-6 space-y-5">
-                      <h3 className="text-lg font-black text-slate-900">
+                  <div className="space-y-5">
+                    <div className="bg-slate-50 rounded-2xl p-5 space-y-4">
+                      <h3 className="text-lg font-bold text-slate-900">
                         Resumen de tu cotización
                       </h3>
                       
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         {formData.name && (
                           <div className="flex justify-between items-center">
-                            <span className="text-slate-400 text-sm">Nombre:</span>
-                            <span className="font-bold text-slate-900">{formData.name}</span>
+                            <span className="text-slate-500 text-sm font-medium">Nombre:</span>
+                            <span className="font-semibold text-slate-900">{formData.name}</span>
                           </div>
                         )}
                         
                         {formData.phone && (
                           <div className="flex justify-between items-center">
-                            <span className="text-slate-400 text-sm">Teléfono:</span>
-                            <span className="font-bold text-slate-900">{formData.phone}</span>
+                            <span className="text-slate-500 text-sm font-medium">Teléfono:</span>
+                            <span className="font-semibold text-slate-900">{formData.phone}</span>
                           </div>
                         )}
                         
                         {formData.clientType && (
                           <div className="flex justify-between items-center">
-                            <span className="text-slate-400 text-sm">Tipo de cliente:</span>
-                            <span className="font-bold text-slate-900">
+                            <span className="text-slate-500 text-sm font-medium">Tipo de cliente:</span>
+                            <span className="font-semibold text-slate-900">
                               {clientTypes.find(t => t.value === formData.clientType)?.label}
                             </span>
                           </div>
@@ -758,15 +758,15 @@ export default function HomePage() {
                         
                         {formData.weeklyConsumption && (
                           <div className="flex justify-between items-center">
-                            <span className="text-slate-400 text-sm">Consumo:</span>
-                            <span className="font-bold text-slate-900">{formData.weeklyConsumption} garrafones/{frequency === "dia" ? "día" : "semana"}</span>
+                            <span className="text-slate-500 text-sm font-medium">Consumo:</span>
+                            <span className="font-semibold text-slate-900">{formData.weeklyConsumption} garrafones/{frequency === "dia" ? "día" : "semana"}</span>
                           </div>
                         )}
                         
                         {formData.zone && (
                           <div className="flex justify-between items-center">
-                            <span className="text-slate-400 text-sm">Zona:</span>
-                            <span className="font-bold text-slate-900">
+                            <span className="text-slate-500 text-sm font-medium">Zona:</span>
+                            <span className="font-semibold text-slate-900">
                               {zones.find(z => z.value === formData.zone)?.label}
                             </span>
                           </div>
@@ -778,7 +778,7 @@ export default function HomePage() {
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-5 bg-linear-to-r from-emerald-500 to-emerald-600 text-white font-black rounded-3xl hover:from-emerald-600 hover:to-emerald-700 transition-all shadow-lg shadow-emerald-500/20 text-base flex items-center justify-center gap-3"
+                      className="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all shadow-[0_4px_12px_rgb(0,0,0,0.15)] text-base flex items-center justify-center gap-3"
                     >
                       <MessageCircle className="w-5 h-5" strokeWidth={2} />
                       Enviar por WhatsApp
@@ -790,23 +790,28 @@ export default function HomePage() {
           </AnimatePresence>
         </div>
 
-        {/* Botones de navegación minimalistas */}
-        <div className="shrink-0 py-6 px-8">
-          <div className="flex items-center justify-between">
+        {/* Botones de navegación con diseño premium */}
+        <div className="shrink-0 py-5 px-6">
+          <div className="flex items-center justify-between gap-4">
             <button
               onClick={handlePrevious}
               disabled={currentSlide === 0}
-              className="w-14 h-14 rounded-full bg-blue-50 text-slate-700 hover:bg-blue-100 disabled:opacity-20 disabled:cursor-not-allowed transition-all flex items-center justify-center"
+              className="w-12 h-12 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center"
             >
-              <ArrowLeft className="w-5 h-5" strokeWidth={2} />
+              <ArrowLeft className="w-5 h-5" strokeWidth={2.5} />
             </button>
             
             <button
               onClick={handleNext}
               disabled={currentSlide === slides.length - 1 || !isNextButtonEnabled()}
-              className={`w-14 h-14 rounded-full transition-all flex items-center justify-center shadow-lg disabled:opacity-20 disabled:cursor-not-allowed ${getNextButtonColor()}`}
+              className={`flex-1 max-w-[280px] py-3.5 rounded-full transition-all flex items-center justify-center gap-2 font-semibold text-base shadow-[0_4px_12px_rgb(0,0,0,0.15)] disabled:opacity-30 disabled:cursor-not-allowed ${
+                isNextButtonEnabled() && currentSlide < slides.length - 1
+                  ? "bg-slate-900 text-white hover:bg-slate-800"
+                  : "bg-slate-200 text-slate-400"
+              }`}
             >
-              <ArrowRight className="w-5 h-5 text-white" strokeWidth={2} />
+              <span>Continuar</span>
+              <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
             </button>
           </div>
         </div>
