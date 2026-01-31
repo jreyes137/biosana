@@ -499,23 +499,19 @@ export default function HomePage() {
                           key={type.value}
                           type="button"
                           onClick={() => handleInputChange("clientType", type.value)}
-                          className={`flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 ${
+                          className={`flex flex-col items-center justify-center gap-3 p-6 rounded-3xl transition-all duration-300 active:scale-95 ${
                             formData.clientType === type.value
-                              ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] shadow-lg shadow-blue-500/30"
-                              : "bg-[#F5F5F7]/60 backdrop-blur-sm hover:bg-[#E1F5FE]/40 border border-white/20"
+                              ? "bg-blue-50/50 border-2 border-[#007AFF] shadow-lg shadow-blue-500/10"
+                              : "bg-transparent border border-slate-200 hover:border-slate-300 hover:bg-slate-50/30"
                           }`}
                         >
-                          <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 ${
-                            formData.clientType === type.value
-                              ? "bg-white/20"
-                              : "bg-white/60"
-                          }`}>
-                            <Building className={`w-6 h-6 ${formData.clientType === type.value ? "text-white" : "text-[#007AFF]"}`} strokeWidth={1.5} />
+                          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-50 to-blue-100/50 flex items-center justify-center shrink-0">
+                            <Building className={`w-6 h-6 ${formData.clientType === type.value ? "text-[#007AFF]" : "text-slate-600"}`} strokeWidth={2} />
                           </div>
-                          <span className={`text-base font-semibold ${
+                          <span className={`text-sm font-semibold ${
                             formData.clientType === type.value
-                              ? "text-white"
-                              : "text-[#003B5C]"
+                              ? "text-[#007AFF]"
+                              : "text-slate-700"
                           }`}>
                             {type.label}
                           </span>
@@ -553,14 +549,18 @@ export default function HomePage() {
                               setCustomZone("");
                             }
                           }}
-                          className={`p-4 rounded-2xl transition-all duration-300 flex flex-col items-center justify-center space-y-2 min-h-[90px] ${
+                          className={`p-4 rounded-3xl transition-all duration-300 active:scale-95 flex flex-col items-center justify-center space-y-2 min-h-[90px] ${
                             formData.zone === zone.value
-                              ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white shadow-lg shadow-blue-500/30"
-                              : "bg-[#F5F5F7]/60 backdrop-blur-sm hover:bg-[#E1F5FE]/40 text-[#003B5C] border border-white/20"
+                              ? "bg-blue-50/50 border-2 border-[#007AFF] shadow-lg shadow-blue-500/10"
+                              : "bg-transparent border border-slate-200 hover:border-slate-300 hover:bg-slate-50/30"
                           }`}
                         >
-                          <MapPin className="w-5 h-5 shrink-0" strokeWidth={1.5} />
-                          <span className="text-sm font-semibold">
+                          <MapPin className={`w-5 h-5 shrink-0 ${formData.zone === zone.value ? "text-[#007AFF]" : "text-slate-600"}`} strokeWidth={2} />
+                          <span className={`text-sm font-semibold ${
+                            formData.zone === zone.value
+                              ? "text-[#007AFF]"
+                              : "text-slate-700"
+                          }`}>
                             {zone.label}
                           </span>
                         </button>
@@ -604,14 +604,14 @@ export default function HomePage() {
                     
                     {/* Selector de Frecuencia */}
                     <div className="flex justify-center">
-                      <div className="inline-flex rounded-full bg-[#F5F5F7]/60 backdrop-blur-sm p-1 border border-white/20">
+                      <div className="inline-flex rounded-full bg-slate-100/80 p-1 border border-slate-200">
                         <button
                           type="button"
                           onClick={() => setFrequency("semana")}
-                          className={`px-5 py-2 rounded-full transition-all duration-300 text-sm font-semibold ${
+                          className={`px-5 py-2 rounded-full transition-all duration-300 active:scale-95 text-sm font-semibold ${
                             frequency === "semana"
-                              ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white shadow-md"
-                              : "text-[#8E8E93] hover:text-[#003B5C]"
+                              ? "bg-[#007AFF] text-white shadow-md"
+                              : "text-slate-700 hover:text-slate-900"
                           }`}
                         >
                           Por Semana
@@ -619,10 +619,10 @@ export default function HomePage() {
                         <button
                           type="button"
                           onClick={() => setFrequency("dia")}
-                          className={`px-5 py-2 rounded-full transition-all duration-300 text-sm font-semibold ${
+                          className={`px-5 py-2 rounded-full transition-all duration-300 active:scale-95 text-sm font-semibold ${
                             frequency === "dia"
-                              ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white shadow-md"
-                              : "text-[#8E8E93] hover:text-[#003B5C]"
+                              ? "bg-[#007AFF] text-white shadow-md"
+                              : "text-slate-700 hover:text-slate-900"
                           }`}
                         >
                           Por Día
@@ -678,10 +678,10 @@ export default function HomePage() {
                                 key={range}
                                 type="button"
                                 onClick={() => handleInputChange("weeklyConsumption", min)}
-                                className={`px-3 py-1.5 rounded-full transition-all duration-300 text-xs font-semibold ${
+                                className={`px-4 py-2 rounded-full transition-all duration-300 active:scale-95 text-xs font-semibold ${
                                   isSelected
-                                    ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white shadow-lg shadow-blue-500/30"
-                                    : "bg-[#F5F5F7]/60 backdrop-blur-sm text-[#8E8E93] hover:bg-[#E1F5FE]/40 border border-white/20"
+                                    ? "bg-blue-50/50 border-2 border-[#007AFF] text-[#007AFF] shadow-lg shadow-blue-500/10"
+                                    : "bg-transparent border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50/30"
                                 }`}
                               >
                                 {range}
@@ -810,7 +810,7 @@ export default function HomePage() {
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-3.5 bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white font-bold rounded-2xl hover:from-[#0051D5] hover:to-[#00A3FF] transition-all shadow-lg shadow-blue-500/30 text-sm flex items-center justify-center gap-2"
+                      className="w-full py-3.5 bg-gradient-to-r from-[#007AFF] to-[#0051D5] text-white font-bold rounded-full hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 transition-all text-sm flex items-center justify-center gap-2"
                     >
                       <MessageCircle className="w-5 h-5" strokeWidth={2} />
                       Enviar por WhatsApp
@@ -829,7 +829,7 @@ export default function HomePage() {
             <button
               onClick={handlePrevious}
               disabled={currentSlide === 0}
-              className="w-12 h-12 rounded-full bg-[#F5F5F7]/60 backdrop-blur-sm text-[#007AFF] hover:bg-[#E1F5FE]/60 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 border border-white/20"
+              className="w-12 h-12 rounded-full bg-slate-100/80 text-slate-700 hover:bg-slate-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 border border-slate-200"
             >
               <ArrowLeft className="w-5 h-5" strokeWidth={2.5} />
             </button>
@@ -837,10 +837,10 @@ export default function HomePage() {
             <button
               onClick={handleNext}
               disabled={currentSlide === slides.length - 1 || !isNextButtonEnabled()}
-              className={`flex-1 max-w-[280px] py-3.5 rounded-full transition-all flex items-center justify-center gap-2 font-semibold text-base shadow-lg disabled:opacity-30 disabled:cursor-not-allowed ${
+              className={`flex-1 max-w-[280px] py-3.5 rounded-full transition-all active:scale-95 flex items-center justify-center gap-2 font-semibold text-base disabled:opacity-30 disabled:cursor-not-allowed ${
                 isNextButtonEnabled() && currentSlide < slides.length - 1
-                  ? "bg-gradient-to-r from-[#007AFF] to-[#00C6FF] text-white hover:from-[#0051D5] hover:to-[#00A3FF] shadow-blue-500/30"
-                  : "bg-[#F5F5F7]/60 backdrop-blur-sm text-[#8E8E93] border border-white/20"
+                  ? "bg-gradient-to-r from-[#007AFF] to-[#0051D5] text-white hover:shadow-lg hover:shadow-blue-500/20"
+                  : "bg-slate-200 text-slate-400 border border-slate-300"
               }`}
             >
               <span>Continuar</span>
