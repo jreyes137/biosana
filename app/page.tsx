@@ -585,8 +585,17 @@ export default function HomePage() {
                         </label>
                         <input
                           type="text"
+                          autoComplete="address-level2"
                           value={customZone}
                           onChange={(e) => setCustomZone(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              e.preventDefault();
+                              if (customZone.trim()) {
+                                handleNext();
+                              }
+                            }
+                          }}
                           className="w-full p-3 text-sm border border-slate-200 rounded-2xl bg-slate-50 focus:outline-none focus:border-slate-900 focus:bg-white transition-all placeholder:text-slate-400"
                           placeholder="Ej: Colonia Libertad, Zona Río, etc."
                         />
@@ -644,6 +653,8 @@ export default function HomePage() {
                     <div className="flex flex-col items-center space-y-4">
                       <input
                         type="number"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         min={frequency === "dia" ? 10 : getMinimumConsumption()}
                         max="500"
                         value={formData.weeklyConsumption || ""}
@@ -652,6 +663,15 @@ export default function HomePage() {
                           const minimum = frequency === "dia" ? 10 : getMinimumConsumption();
                           if (value === "" || value >= minimum) {
                             handleInputChange("weeklyConsumption", value);
+                          }
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            const minimum = frequency === "dia" ? 10 : getMinimumConsumption();
+                            if (formData.weeklyConsumption && formData.weeklyConsumption >= minimum) {
+                              handleNext();
+                            }
                           }
                         }}
                         className="w-full max-w-[160px] p-3 text-xl font-bold text-center border-2 border-white/30 rounded-2xl bg-[#F5F5F7]/60 backdrop-blur-sm focus:outline-none focus:border-[#007AFF] focus:bg-white/80 transition-all placeholder:text-[#8E8E93] text-[#003B5C]"
@@ -734,8 +754,17 @@ export default function HomePage() {
                       </label>
                       <input
                         type="text"
+                        autoComplete="name"
                         value={formData.name}
                         onChange={(e) => handleInputChange("name", e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            if (formData.name.trim() && formData.phone.trim() && formData.phone.length >= 10) {
+                              handleNext();
+                            }
+                          }
+                        }}
                         className="w-full p-3 text-sm border-2 border-white/30 rounded-2xl bg-[#F5F5F7]/60 backdrop-blur-sm focus:outline-none focus:border-[#007AFF] focus:bg-white/80 transition-all placeholder:text-[#8E8E93] text-[#003B5C]"
                         placeholder="Tu nombre"
                       />
@@ -747,10 +776,21 @@ export default function HomePage() {
                       </label>
                       <input
                         type="tel"
+                        inputMode="tel"
+                        autoComplete="tel"
                         value={formData.phone}
                         onChange={(e) => handleInputChange("phone", e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            if (formData.name.trim() && formData.phone.trim() && formData.phone.length >= 10) {
+                              handleNext();
+                            }
+                          }
+                        }}
                         className="w-full p-3 text-sm border-2 border-white/30 rounded-2xl bg-[#F5F5F7]/60 backdrop-blur-sm focus:outline-none focus:border-[#007AFF] focus:bg-white/80 transition-all placeholder:text-[#8E8E93] text-[#003B5C]"
                         placeholder="664 123 4567"
+                        maxLength={10}
                       />
                     </div>
                   </div>
