@@ -166,7 +166,7 @@ export default function HomePage() {
     }
     
     if (currentSlideData.type === "contact") {
-      if (!formData.name.trim() || !formData.phone.trim() || formData.phone.length < 10) return;
+      if (!formData.name.trim() || !formData.phone.trim() || formData.phone.length !== 10) return;
     }
     
     if (currentSlide < slides.length - 1) {
@@ -255,7 +255,7 @@ export default function HomePage() {
     }
     
     if (currentSlideData.type === "contact") {
-      return !!formData.name.trim() && !!formData.phone.trim() && formData.phone.length >= 10;
+      return !!formData.name.trim() && !!formData.phone.trim() && formData.phone.length === 10;
     }
     
     return true;
@@ -760,7 +760,7 @@ export default function HomePage() {
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
                             e.preventDefault();
-                            if (formData.name.trim() && formData.phone.trim() && formData.phone.length >= 10) {
+                            if (formData.name.trim() && formData.phone.trim() && formData.phone.length === 10) {
                               handleNext();
                             }
                           }
@@ -772,26 +772,42 @@ export default function HomePage() {
                     
                     <div className="space-y-3">
                       <label className="text-sm font-semibold text-[#003B5C]">
-                        Número de teléfono
+                        Número de teléfono (10 dígitos)
                       </label>
                       <input
                         type="tel"
-                        inputMode="tel"
+                        inputMode="numeric"
+                        pattern="[0-9]{10}"
                         autoComplete="tel"
                         value={formData.phone}
-                        onChange={(e) => handleInputChange("phone", e.target.value)}
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/\D/g, '');
+                          if (value.length <= 10) {
+                            handleInputChange("phone", value);
+                          }
+                        }}
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
                             e.preventDefault();
-                            if (formData.name.trim() && formData.phone.trim() && formData.phone.length >= 10) {
+                            if (formData.name.trim() && formData.phone.trim() && formData.phone.length === 10) {
                               handleNext();
                             }
                           }
                         }}
                         className="w-full p-3 text-sm border-2 border-white/30 rounded-2xl bg-[#F5F5F7]/60 backdrop-blur-sm focus:outline-none focus:border-[#007AFF] focus:bg-white/80 transition-all placeholder:text-[#8E8E93] text-[#003B5C]"
-                        placeholder="664 123 4567"
+                        placeholder="6641234567"
                         maxLength={10}
                       />
+                      {formData.phone && formData.phone.length < 10 && (
+                        <p className="text-xs text-red-500 font-medium">
+                          Faltan {10 - formData.phone.length} dígitos
+                        </p>
+                      )}
+                      {formData.phone && formData.phone.length === 10 && (
+                        <p className="text-xs text-green-600 font-medium">
+                          ✓ Número válido
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="shrink-0"></div>
@@ -861,7 +877,7 @@ export default function HomePage() {
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-4 bg-gradient-to-r from-green-300 to-green-400 text-green-800 font-bold rounded-[24px] hover:shadow-lg hover:shadow-green-300/50 active:scale-95 transition-all text-sm flex items-center justify-center gap-2 border-2 border-green-400"
+                      className="w-full py-4 bg-gradient-to-r from-green-300 to-green-400 text-green-800 font-bold rounded-[32px] hover:shadow-lg hover:shadow-green-300/50 active:scale-95 transition-all text-sm flex items-center justify-center gap-2 border-2 border-green-400"
                     >
                       <MessageCircle className="w-5 h-5" strokeWidth={2} />
                       Enviar por WhatsApp
@@ -880,7 +896,7 @@ export default function HomePage() {
             <button
               onClick={handlePrevious}
               disabled={currentSlide === 0}
-              className="w-12 h-12 rounded-[20px] bg-slate-100/80 text-slate-600 hover:bg-slate-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 border-2 border-slate-200"
+              className="w-12 h-12 rounded-[24px] bg-slate-100/80 text-slate-600 hover:bg-slate-200 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 border-2 border-slate-200"
             >
               <ArrowLeft className="w-5 h-5" strokeWidth={2.5} />
             </button>
@@ -888,7 +904,7 @@ export default function HomePage() {
             <button
               onClick={handleNext}
               disabled={currentSlide === slides.length - 1 || !isNextButtonEnabled()}
-              className={`flex-1 max-w-[280px] py-3.5 rounded-[24px] transition-all active:scale-95 flex items-center justify-center gap-2 font-semibold text-base disabled:opacity-30 disabled:cursor-not-allowed ${
+              className={`flex-1 max-w-[280px] py-3.5 rounded-[32px] transition-all active:scale-95 flex items-center justify-center gap-2 font-semibold text-base disabled:opacity-30 disabled:cursor-not-allowed ${
                 isNextButtonEnabled() && currentSlide < slides.length - 1
                   ? "bg-gradient-to-r from-blue-300 to-blue-400 text-blue-800 hover:shadow-lg hover:shadow-blue-300/50 border-2 border-blue-400"
                   : "bg-slate-200 text-slate-400 border-2 border-slate-300"
