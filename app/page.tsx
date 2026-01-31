@@ -187,19 +187,26 @@ export default function HomePage() {
   };
 
   const getWhatsAppMessage = () => {
-    const clientTypeLabel = clientTypes.find(t => t.value === formData.clientType)?.label || formData.clientType;
-    const zoneLabel = formData.zone === "otros" && customZone ? customZone : zones.find(z => z.value === formData.zone)?.label || formData.zone;
+    const clientTypeLabel = clientTypes.find(t => t.value === formData.clientType)?.label || formData.clientType || "cliente";
+    const zoneLabel = formData.zone === "otros" && customZone ? customZone : zones.find(z => z.value === formData.zone)?.label || formData.zone || "Tijuana";
     
     let consumoText = "";
-    if (frequency === "dia" && formData.weeklyConsumption) {
-      const consumoDiario = formData.weeklyConsumption;
-      const consumoSemanal = consumoDiario * 6;
-      consumoText = `${consumoDiario} garrafones/día (${consumoSemanal} garrafones/semana)`;
+    if (formData.weeklyConsumption) {
+      if (frequency === "dia") {
+        const consumoDiario = formData.weeklyConsumption;
+        const consumoSemanal = consumoDiario * 6;
+        consumoText = `${consumoDiario} garrafones/día (${consumoSemanal} garrafones/semana)`;
+      } else {
+        consumoText = `${formData.weeklyConsumption} garrafones/semana`;
+      }
     } else {
-      consumoText = `${formData.weeklyConsumption} garrafones/semana`;
+      consumoText = "consultar cantidad";
     }
     
-    return `¡Hola BIOSANA! 💧 Soy de ${zoneLabel} y me interesa surtir mi ${clientTypeLabel}. Ocupo ${consumoText}. Mi nombre es ${formData.name} y mi teléfono es ${formData.phone}. ¿Me pueden enviar precios por volumen?`;
+    const name = formData.name.trim() || "cliente interesado";
+    const phone = formData.phone.trim() || "sin teléfono registrado";
+    
+    return `¡Hola BIOSANA! 💧\n\nSoy de ${zoneLabel} y me interesa surtir mi ${clientTypeLabel}.\n\nConsumo estimado: ${consumoText}\n\nMis datos:\n• Nombre: ${name}\n• Teléfono: ${phone}\n\n¿Me pueden enviar precios por volumen y disponibilidad?`;
   };
 
   const getWhatsAppLink = () => {
@@ -493,7 +500,7 @@ export default function HomePage() {
                     <h3 className="text-xs font-semibold text-slate-500 tracking-wide uppercase">
                       Tipo de cliente
                     </h3>
-                    <div className="flex flex-col gap-3">
+                      <div className="flex flex-col gap-3">
                       {clientTypes.map((type) => (
                         <button
                           key={type.value}
@@ -501,14 +508,14 @@ export default function HomePage() {
                           onClick={() => handleInputChange("clientType", type.value)}
                           className={`flex flex-col items-center justify-center gap-3 p-6 rounded-[28px] transition-all duration-300 active:scale-95 ${
                             formData.clientType === type.value
-                              ? "bg-blue-100/70 border-2 border-blue-300 shadow-lg shadow-blue-200/50"
-                              : "bg-slate-50/80 border-2 border-slate-200 hover:border-blue-200 hover:bg-blue-50/50"
+                              ? "bg-blue-100/80 border-2 border-blue-300 shadow-lg shadow-blue-200/50"
+                              : "bg-slate-50/80 border-2 border-slate-200 hover:border-blue-200 hover:bg-blue-50/70"
                           }`}
                         >
                           <div className={`w-14 h-14 rounded-full flex items-center justify-center shrink-0 ${
                             formData.clientType === type.value
-                              ? "bg-blue-200/60"
-                              : "bg-blue-100/50"
+                              ? "bg-blue-200/70"
+                              : "bg-blue-100/60"
                           }`}>
                             <Building className={`w-6 h-6 ${formData.clientType === type.value ? "text-blue-600" : "text-blue-500"}`} strokeWidth={2} />
                           </div>
@@ -555,8 +562,8 @@ export default function HomePage() {
                           }}
                           className={`p-4 rounded-[24px] transition-all duration-300 active:scale-95 flex flex-col items-center justify-center space-y-2 min-h-[90px] ${
                             formData.zone === zone.value
-                              ? "bg-emerald-100/70 border-2 border-emerald-300 shadow-lg shadow-emerald-200/50"
-                              : "bg-slate-50/80 border-2 border-slate-200 hover:border-emerald-200 hover:bg-emerald-50/50"
+                              ? "bg-emerald-100/80 border-2 border-emerald-300 shadow-lg shadow-emerald-200/50"
+                              : "bg-slate-50/80 border-2 border-slate-200 hover:border-emerald-200 hover:bg-emerald-50/70"
                           }`}
                         >
                           <MapPin className={`w-5 h-5 shrink-0 ${formData.zone === zone.value ? "text-emerald-600" : "text-emerald-500"}`} strokeWidth={2} />
@@ -684,8 +691,8 @@ export default function HomePage() {
                                 onClick={() => handleInputChange("weeklyConsumption", min)}
                                 className={`px-4 py-2 rounded-[20px] transition-all duration-300 active:scale-95 text-xs font-semibold ${
                                   isSelected
-                                    ? "bg-amber-100/70 border-2 border-amber-300 text-amber-700 shadow-lg shadow-amber-200/50"
-                                    : "bg-slate-50/80 border-2 border-slate-200 text-slate-600 hover:border-amber-200 hover:bg-amber-50/50"
+                                    ? "bg-amber-100/80 border-2 border-amber-300 text-amber-700 shadow-lg shadow-amber-200/50"
+                                    : "bg-slate-50/80 border-2 border-slate-200 text-slate-600 hover:border-amber-200 hover:bg-amber-50/70"
                                 }`}
                               >
                                 {range}
